@@ -1,0 +1,95 @@
+@font-face {
+	font-family: 'main';
+  src: url('MSW98UI-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;	
+}
+
+body {
+   margin: 0px;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+html {
+	font-family: 'main';
+	font-smooth: never;
+	-webkit-font-smoothing : none;
+	background-color: #d4d0c8 ;
+	z-index: -1;
+}
+
+h1 {
+	font-family: 'main';
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+/* ================================================= */
+
+/* 1. Set up the parent wrapper as a flex container */
+.layout-container {
+  display: flex;         /* Aligns children horizontally */
+  min-height: 100vh;     /* Forces container to fill full viewport height */
+}
+
+/* 2. Style your sidebar navbar */
+.sidebar-navbar {
+  width: 250px;          /* Set a fixed width for your navbar */
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box; 
+}
+
+/* ================================================= */
+
+a:visited {
+  color: blue; /* Set to your preferred color */
+  text-decoration: none;
+}
+
+.fix {
+	position:absolute;
+    bottom:0px;
+    left:50%;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #133455;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #2c3e50;
+  color: black;
+}
+
+/* Add an active class to highlight the current page */
+.topnav a.active {
+  background-color: #3b628a;
+  color: white;
+}
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+  display: none;
+}

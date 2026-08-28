@@ -8,3 +8,5 @@
 git add .
 
 git commit -m "Synced from main desktop at South Tech"
+
+git push

@@ -1,3 +1,14 @@
+  /* The div you want to push to the right */
+  .right-box {
+    float: right;
+    width: 150px;
+  }
+
+  /* Clears the float so subsequent content doesn't break */
+  .clearfix {
+    clear: both;
+}
+
 nav {
     background-color: #6F4930;
     margin: 0;

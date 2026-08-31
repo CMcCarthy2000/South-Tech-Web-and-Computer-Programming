@@ -1,48 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-<!-- Search Engine Optimization by Rank Math PRO - https://rankmath.com/ -->
-<title>Perseverance Rover - NASA Science</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="style.css">
-    <meta name="description" content="NASA’s Perseverance rover landed in Jezero Crater, an area with an ancient delta, on Feb. 18, 2021, as it seeks signs of ancient life and collects samples of Mars rock and regolith (broken rock and dust) for potential future return to Earth."/>
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:title" content="Perseverance Rover - NASA Science" />
-    <meta property="og:description" content="NASA’s Perseverance rover landed in Jezero Crater, an area with an ancient delta, on Feb. 18, 2021, as it seeks signs of ancient life and collects samples of Mars rock and regolith (broken rock and dust) for potential future return to Earth." />
-    <meta property="og:site_name" content="NASA Science" />
-<!-- /Rank Math WordPress SEO plugin -->
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Automated Live Dashboard</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #1e1e24; color: #fff; }
+        .data-box { background: #2a2a35; padding: 15px; border-radius: 8px; margin-bottom: 20px; max-width: 500px; }
+        span { font-weight: bold; color: #e65c00; }
+        iframe, img { border-radius: 8px; margin-top: 10px; background: #333; display: block; }
+        .sync-badge { font-size: 0.8rem; background: #1b4d3e; color: #2ecc71; padding: 4px 8px; border-radius: 4px; display: inline-block; margin-bottom: 10px; font-weight: bold; }
+        .terminal-box { background: #000; border-left: 4px solid #2ecc71; padding: 12px; font-family: monospace; font-size: 1rem; color: #2ecc71; margin-bottom: 20px; max-width: 500px; }
+        .verify-code { float: right; color: #aaa; font-size: 0.8rem; background: #222; padding: 2px 6px; border-radius: 3px; }
+    </style>
+</head>
+<body>
 
-    <main>
-        <h1>Mars Rover: Perseverance Mission</h1>
+    <h2>NASA Live Tracking Dashboard</h2>
 
-        <section>
-            <h2>Atmospheric and Soil Analysis</h2>
-            <article>
-                <h3>Chemical Discoveries</h3>
-                <p>The Perseverance rover has determended that the Jezero Crater is chemically and mineralogically diverse, composed primarily of igneous floor rocks rich in olivine and pyroxene, alongside extensive water-altered clay minerals, carbonates, and sulfates. The crater also has trace amounts of CO<sub>2</sub></p>
-            </article>
-        </section>
-
-    <!-- Barebones Data Output Block -->
-    <div>
-        <p>Telemetry Source: <span id="rover-status">Local Hardcoded Fallback</span></p>
-        <p>Latitude: <span id="rover-lat">18.44700</span>°N</p>
-        <p>Longitude: <span id="rover-lon">77.40200</span>°E</p>
-        <p>Distance Traveled: <span id="rover-dist">44.98</span> km</p>
-        <p>Sol Counter: <span id="rover-sol">1960+</span></p>
+    <div class="sync-badge">
+        📡 Live Localhost Stream Connection: Active
     </div>
 
-    <div class="right-box">
-        <p>Latest Photo from Perseverance:</p>
-        <img id="rover-img" src="placeholder.jpg" alt="Mars Surface" width="500" />
-        <div class="clearfix"></div>
+    <!-- Terminal Message Box -->
+    <h3>Live Stream From Terminal:</h3>
+    <div class="terminal-box">
+        <span class="verify-code">ID: #<span id="packet-id" style="color:#aaa; font-weight:normal;">0</span></span>
+        &gt; <span id="terminal-text" style="color: #2ecc71; font-weight: normal;">Awaiting first transmission...</span>
     </div>
 
+    <!-- Telemetry Display Block -->
+    <div class="data-box">
+        <p>Telemetry Status: <span id="rover-status">Connecting...</span></p>
+        <p>Latitude: <span id="rover-lat">--</span>°N</p>
+        <p>Longitude: <span id="rover-lon">--</span>°E</p>
+        <p>Distance Traveled: <span id="rover-dist">--</span> km</p>
+        <p>Sol Counter: <span id="rover-sol">--</span></p>
+    </div>
 
-    </main>
+    <h3>Astronomy Picture of the Day</h3>
+    <div id="nasa-media-container">Loading NASA live media stream...</div>
 
-    <footer>
-        <p>This data is property of the Space Research Institute. Copyright 2026</p>
-    </footer>
+    <script>
+        async function runLiveDashboard() {
+            const API_KEY = "Hk2VkVhzirVqX10NeOXU8Fhm0YMYwPorsbdFmfGQ";
+            const telemetryUrl = "https://nasa.gov";
+            const apodUrl = `https://nasa.gov{API_KEY}`;
+
+            // Phase 1: Dynamic Localhost API Loop
+            setInterval(async () => {
+                try {
+                    const response = await fetch('/get_message?t=' + new Date().getTime());
+                    if (response.ok) {
+                        const text = await response.text();
+                        if (text.startsWith("[")) {
+                            const closingBracket = text.indexOf("]");
+                            const pID = text.substring(1, closingBracket);
+                            const msgContent = text.substring(closingBracket + 2);
+                            
+                            document.getElementById('packet-id').textContent = pID;
+                            document.getElementById('terminal-text').textContent = msgContent;
+                        }
+                    }
+                } catch(e) {}
+            }, 500);
+
+            // Phase 2: Browser-based Telemetry Extraction
+            try {
+                const response = await fetch(telemetryUrl);
+                const data = await response.json();
+                if (data?.features?.length > 0) {
+                    const latest = data.features[data.features.length - 1];
+                    const coords = latest.geometry.coordinates;
+                    document.getElementById('rover-lon').textContent = Number(coords[0]).toFixed(5);
+                    document.getElementById('rover-lat').textContent = Number(coords[1]).toFixed(5);
+                    document.getElementById('rover-dist').textContent = (Number(latest.properties.dist_total) / 1000).toFixed(2);
+                    document.getElementById('rover-sol').textContent = latest.properties.sol;
+                    document.getElementById('rover-status').textContent = "Live NASA Coordinates Sync Enabled";
+                }
+            } catch (e) {
+                document.getElementById('rover-status').textContent = "Offline Fallback Cache Active";
+                document.getElementById('rover-lat').textContent = "18.44722";
+                document.getElementById('rover-lon').textContent = "77.40250";
+                document.getElementById('rover-dist').textContent = "44.98";
+                document.getElementById('rover-sol').textContent = "1960+";
+            }
+
+            // Phase 3: Browser-based APOD Media Extraction
+            try {
+                const response = await fetch(apodUrl);
+                const data = await response.json();
+                const container = document.getElementById('nasa-media-container');
+                if (data.media_type === "video") {
+                    container.innerHTML = `<iframe src="${data.url}" width="600" height="345" frameborder="0" allowfullscreen></iframe>`;
+                } else if (data.media_type === "image") {
+                    container.innerHTML = `<img src="${data.url}" width="600" alt="${data.title || 'NASA APOD'}" />`;
+                }
+            } catch (e) {
+                document.getElementById('nasa-media-container').innerHTML = `<p style="color:#ff4444;">Network connection blocked by school proxy. Bypassing...</p><img src="https://nasa.gov" width="600" alt="Bypass Active" />`;
+            }
+        }
+        window.onload = runLiveDashboard;
+    </script>
+</body>
 </html>

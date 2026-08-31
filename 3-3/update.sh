@@ -1,41 +1,32 @@
 #!/bin/bash
 
-HTML_FILE="index.html"
-TMP_JSON="/tmp/mars_photo.json"
-LOCAL_IMAGE="latest_mars.jpg"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE}" )" && pwd )"
+MSG_FILE="$SCRIPT_DIR/message.txt"
+PORT=8000
 
-# Official NASA API for the absolute newest photos uploaded by Perseverance
-PHOTO_API="https://api.nasa.gov/mars-photos/api/v1/rovers/perseverance/latest_photos?api_key=Hk2VkVhzirVqX10NeOXU8Fhm0YMYwPorsbdFmfGQ"
+echo "========================================================"
+echo "LAUNCHING INTERACTIVE BASH SERVER VIA PORT $PORT"
+echo "========================================================"
+echo "📡 Listening for background web requests natively..."
+echo "👉 Open your browser to http://localhost:$PORT to test connection!"
 
-echo "Connecting to NASA Mars Photo Registry..."
+PACKET_COUNTER=0
+echo "[$PACKET_COUNTER] Awaiting connection..." > "$MSG_FILE"
 
-# Fetch the photo registry data
-if curl -s --connect-timeout 10 "$PHOTO_API" > "$TMP_JSON" && [ -s "$TMP_JSON" ]; then
+# Micro webserver loop running purely on basic command tools
+while true; do
+    # Listen on port 8000 for incoming browser handshake signals
+    # Respond with correct HTTP/1.1 headers so the browser accepts the raw data blocks
+    (echo -ne "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nAccess-Control-Allow-Origin: *\r\nCache-Control: no-cache\r\n\r\n"; cat "$MSG_FILE") | nc -l -p $PORT -q 1 2>/dev/null
     
-    # FIXED: Added [0] to correctly extract 'img_src' from the first element of the array
-    REMOTE_URL=$(jq -r '.latest_photos[0].img_src' "$TMP_JSON" 2>/dev/null)
-
-    # Check if a valid URL was returned (and ensure it's not null, empty, or an error)
-    if [ "$REMOTE_URL" != "null" ] && [ ! -z "$REMOTE_URL" ]; then
-        echo "Found newest image URL: $REMOTE_URL"
-        echo "Downloading image..."
-        
-        # Download the image file locally
-        if curl -s -o "$LOCAL_IMAGE" "$REMOTE_URL"; then
-            echo "Success! Saved image locally as '$LOCAL_IMAGE'"
-            
-            # Update the HTML file to point to the new image
-            sed -i -E "s|(<img id=\"rover-img\" src=\")[^\"]*|\\1$LOCAL_IMAGE|" "$HTML_FILE"
-            echo "Updated $HTML_FILE successfully."
-        else
-            echo "ERROR: Failed to download the image file."
-        fi
-    else
-        echo "ERROR: Could not parse a valid image URL from NASA's data."
+    # Prompt the user for input messages
+    echo ""
+    read -p "Type a sentence to display on the webpage: " USER_INPUT
+    
+    if [ ! -z "$USER_INPUT" ]; then
+        PACKET_COUNTER=$(( PACKET_COUNTER + 1 ))
+        # Overwrite the shared file mapping payload safely
+        echo "[$PACKET_COUNTER] $USER_INPUT" > "$MSG_FILE"
+        echo "📡 DATA SENT: Broadcasted verification packet #$PACKET_COUNTER"
     fi
-else
-    echo "ERROR: Failed to connect to NASA's photo API or data was empty."
-fi
-
-# Clean up temp files
-rm -f "$TMP_JSON"
+done

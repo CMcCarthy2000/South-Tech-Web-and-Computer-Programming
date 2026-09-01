@@ -54,6 +54,7 @@ commit_message=$(echo "$commit_message" | tr -d '\r')
 # 3. If you click Cancel or leave it blank, stop the script safely
 if [ -z "$commit_message" ]; then
     echo "Push cancelled: No commit message entered."
+    read -p "Press Enter to exit..."
     exit 1
 fi
 
@@ -63,3 +64,7 @@ git add .
 git commit -m "$commit_message"
 
 git push
+
+# 5. Keep terminal open after execution
+echo ""
+read -p "Process complete. Press Enter to close terminal..."

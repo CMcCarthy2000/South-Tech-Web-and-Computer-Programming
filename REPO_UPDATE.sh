@@ -1,8 +1,8 @@
 #!/bin/bash
 # ======================================================
-# Advanced Git Manager & Publisher
-# Style: Windows 11 Fluent WPF Design
-# Features: Branch selection, File status, Sync modes
+# Advanced Git Control Center
+# Style: Windows 11 Fluent Design (Mica / Acrylic)
+# Features: Dynamic transparency, Branching, Staging view
 # ======================================================
 
 # 1. Gather current Git context
@@ -18,16 +18,68 @@ fi
 # Format git status for display
 formatted_status=$(echo "$status_summary" | sed 's/"/\\"/g' | awk '{print "• " $0}')
 
-# 2. Open Windows 11 Fluent Control Panel
+# 2. Open Windows 11 Fluent Control Panel with Mica Transparency
 gui_output=$(powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "
 Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
+
+# Load DWM API for Windows 11 Backdrop / Transparency effects
+\$code = @'
+using System;
+using System.Runtime.InteropServices;
+
+public class Win11Effects {
+    [DllImport(\"dwmapi.dll\")]
+    public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
+    public static void EnableMica(IntPtr hwnd, bool darkTheme) {
+        // Dark Mode Attribute (DWMWA_USE_IMMERSIVE_DARK_MODE = 20)
+        int darkMode = darkTheme ? 1 : 0;
+        DwmSetWindowAttribute(hwnd, 20, ref darkMode, sizeof(int));
+
+        // Backdrop Type Attribute (DWMWA_SYSTEMBACKDROP_TYPE = 38)
+        // 2 = Mica, 3 = Acrylic, 4 = Tabbed
+        int backdrop = 3; 
+        DwmSetWindowAttribute(hwnd, 38, ref backdrop, sizeof(int));
+    }
+}
+'@
+Add-Type -TypeDefinition \$code
 
 \$xml = @'
 <Window xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"
         xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"
-        Title=\"Git Control Center\" Height=\"480\" Width=\"520\" 
+        Title=\"Git Control Center\" Height=\"500\" Width=\"540\" 
         WindowStartupLocation=\"CenterScreen\" ResizeMode=\"NoResize\"
-        Background=\"#F3F3F3\" Foreground=\"#1A1A1A\" FontFamily=\"Segoe UI Variable, Segoe UI\">
+        Background=\"#80181818\" Foreground=\"#FFFFFF\" FontFamily=\"Segoe UI Variable Text, Segoe UI\">
+    <Window.Resources>
+        <Style TargetType=\"TextBox\">
+            <Setter Property=\"Background\" Value=\"#2D2D2D\"/>
+            <Setter Property=\"Foreground\" Value=\"#FFFFFF\"/>
+            <Setter Property=\"BorderBrush\" Value=\"#404040\"/>
+            <Setter Property=\"BorderThickness\" Value=\"1\"/>
+            <Setter Property=\"Padding\" Value=\"10,6\"/>
+            <Setter Property=\"Template\">
+                <Setter.Value>
+                    <ControlTemplate TargetType=\"TextBox\">
+                        <Border x:Name=\"border\" Background=\"{TemplateBinding Background}\" 
+                                BorderBrush=\"{TemplateBinding BorderBrush}\" 
+                                BorderThickness=\"{TemplateBinding BorderThickness}\" 
+                                CornerRadius=\"6\">
+                            <ScrollViewer x:Name=\"PART_ContentHost\" Focusable=\"false\" HorizontalScrollBarVisibility=\"Hidden\" VerticalScrollBarVisibility=\"Hidden\"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType=\"ComboBox\">
+            <Setter Property=\"Background\" Value=\"#2D2D2D\"/>
+            <Setter Property=\"Foreground\" Value=\"#FFFFFF\"/>
+            <Setter Property=\"BorderBrush\" Value=\"#404040\"/>
+            <Setter Property=\"Padding\" Value=\"8,4\"/>
+        </Style>
+    </Window.Resources>
+
     <Grid Margin=\"24\">
         <Grid.RowDefinitions>
             <RowDefinition Height=\"Auto\"/>
@@ -35,51 +87,48 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
             <RowDefinition Height=\"*\"/>
             <RowDefinition Height=\"Auto\"/>
             <RowDefinition Height=\"Auto\"/>
-            <RowDefinition Height=\"Auto\"/>
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <StackPanel Grid.Row=\"0\" Margin=\"0,0,0,16\">
-            <TextBlock Text=\"Publish Changes\" FontSize=\"20\" FontWeight=\"SemiBold\"/>
-            <TextBlock Text=\"Configure commit details and sync preferences\" FontSize=\"12\" Foreground=\"#5D5D5D\" Margin=\"0,2,0,0\"/>
+        <StackPanel Grid.Row=\"0\" Margin=\"0,0,0,18\">
+            <TextBlock Text=\"Git Control Center\" FontSize=\"22\" FontWeight=\"SemiBold\" Foreground=\"#FFFFFF\"/>
+            <TextBlock Text=\"Configure commit details, branches, and push options\" FontSize=\"12\" Foreground=\"#A0A0A0\" Margin=\"0,2,0,0\"/>
         </StackPanel>
 
         <!-- Commit Message Input -->
         <StackPanel Grid.Row=\"1\" Margin=\"0,0,0,16\">
-            <TextBlock Text=\"Commit Message\" FontSize=\"12\" FontWeight=\"Medium\" Margin=\"0,0,0,6\"/>
-            <TextBox Name=\"CommitMsg\" Height=\"36\" VerticalContentAlignment=\"Center\" Padding=\"10,0\" FontSize=\"13\" 
-                     Background=\"#FFFFFF\" BorderBrush=\"#D1D1D1\" BorderThickness=\"1\"/>
+            <TextBlock Text=\"Commit Message\" FontSize=\"12\" FontWeight=\"Medium\" Foreground=\"#D0D0D0\" Margin=\"0,0,0,6\"/>
+            <TextBox Name=\"CommitMsg\" Height=\"36\" VerticalContentAlignment=\"Center\" FontSize=\"13\"/>
         </StackPanel>
 
-        <!-- Changes Preview -->
+        <!-- Changes Preview Card -->
         <StackPanel Grid.Row=\"2\" Margin=\"0,0,0,16\">
-            <TextBlock Text=\"Staged Files Preview\" FontSize=\"12\" FontWeight=\"Medium\" Margin=\"0,0,0,6\"/>
-            <Border Background=\"#FFFFFF\" BorderBrush=\"#E0E0E0\" BorderThickness=\"1\" CornerRadius=\"4\" Padding=\"8\">
-                <ScrollViewer VerticalScrollBarVisibility=\"Auto\" Height=\"100\">
-                    <TextBlock Name=\"StatusBox\" Text=\"$formatted_status\" FontSize=\"11\" FontFamily=\"Cascadia Code, Consolas\" Foreground=\"#333333\"/>
+            <TextBlock Text=\"Staged Files Preview\" FontSize=\"12\" FontWeight=\"Medium\" Foreground=\"#D0D0D0\" Margin=\"0,0,0,6\"/>
+            <Border Background=\"#202020\" BorderBrush=\"#383838\" BorderThickness=\"1\" CornerRadius=\"8\" Padding=\"12\">
+                <ScrollViewer VerticalScrollBarVisibility=\"Auto\" Height=\"110\">
+                    <TextBlock Name=\"StatusBox\" Text=\"$formatted_status\" FontSize=\"11\" FontFamily=\"Cascadia Code, Consolas\" Foreground=\"#76B9ED\"/>
                 </ScrollViewer>
             </Border>
         </StackPanel>
 
-        <!-- Configuration Options -->
-        <Grid Grid.Row=\"3\" Margin=\"0,0,0,20\">
+        <!-- Configuration Grid -->
+        <Grid Grid.Row=\"3\" Margin=\"0,0,0,24\">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=\"*\"/>
-                <ColumnDefinition Width=\"12\"/>
+                <ColumnDefinition Width=\"16\"/>
                 <ColumnDefinition Width=\"*\"/>
             </Grid.ColumnDefinitions>
 
             <!-- Target Branch -->
             <StackPanel Grid.Column=\"0\">
-                <TextBlock Text=\"Target Branch\" FontSize=\"12\" FontWeight=\"Medium\" Margin=\"0,0,0,6\"/>
-                <TextBox Name=\"TargetBranch\" Text=\"$current_branch\" Height=\"32\" VerticalContentAlignment=\"Center\" Padding=\"8,0\" FontSize=\"12\" 
-                         Background=\"#FFFFFF\" BorderBrush=\"#D1D1D1\" BorderThickness=\"1\"/>
+                <TextBlock Text=\"Target Branch\" FontSize=\"12\" FontWeight=\"Medium\" Foreground=\"#D0D0D0\" Margin=\"0,0,0,6\"/>
+                <TextBox Name=\"TargetBranch\" Text=\"$current_branch\" Height=\"34\" VerticalContentAlignment=\"Center\" FontSize=\"12\"/>
             </StackPanel>
 
-            <!-- Pull Strategy -->
+            <!-- Sync Strategy -->
             <StackPanel Grid.Column=\"2\">
-                <TextBlock Text=\"Sync Strategy\" FontSize=\"12\" FontWeight=\"Medium\" Margin=\"0,0,0,6\"/>
-                <ComboBox Name=\"SyncStrategy\" Height=\"32\" SelectedIndex=\"0\" FontSize=\"12\" VerticalContentAlignment=\"Center\">
+                <TextBlock Text=\"Sync Strategy\" FontSize=\"12\" FontWeight=\"Medium\" Foreground=\"#D0D0D0\" Margin=\"0,0,0,6\"/>
+                <ComboBox Name=\"SyncStrategy\" Height=\"34\" SelectedIndex=\"0\" FontSize=\"12\" VerticalContentAlignment=\"Center\">
                     <ComboBoxItem Content=\"Rebase (Recommended)\"/>
                     <ComboBoxItem Content=\"Merge\"/>
                     <ComboBoxItem Content=\"Force Push (Caution)\"/>
@@ -87,21 +136,41 @@ Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
             </StackPanel>
         </Grid>
 
-        <!-- Footer Actions -->
-        <Border Grid.Row=\"5\" BorderBrush=\"#E5E5E5\" BorderThickness=\"0,1,0,0\" Padding=\"0,16,0,0\">
+        <!-- Action Bar -->
+        <Grid Grid.Row=\"4\">
             <StackPanel Orientation=\"Horizontal\" HorizontalAlignment=\"Right\">
-                <Button Name=\"CancelBtn\" Content=\"Cancel\" Width=\"90\" Height=\"32\" Margin=\"0,0,8,0\" 
-                        Background=\"#E5E5E5\" Foreground=\"#000000\" BorderThickness=\"0\"/>
-                <Button Name=\"PushBtn\" Content=\"Commit &amp; Push\" Width=\"130\" Height=\"32\" IsDefault=\"True\" 
-                        Background=\"#0067C0\" Foreground=\"#FFFFFF\" BorderThickness=\"0\" FontWeight=\"SemiBold\"/>
+                <Button Name=\"CancelBtn\" Content=\"Cancel\" Width=\"90\" Height=\"34\" Margin=\"0,0,10,0\">
+                    <Button.Template>
+                        <ControlTemplate TargetType=\"Button\">
+                            <Border Background=\"#2D2D2D\" BorderBrush=\"#404040\" BorderThickness=\"1\" CornerRadius=\"6\">
+                                <ContentPresenter HorizontalAlignment=\"Center\" VerticalAlignment=\"Center\"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Name=\"PushBtn\" Content=\"Commit &amp; Push\" Width=\"130\" Height=\"34\" IsDefault=\"True\" Foreground=\"#FFFFFF\" FontWeight=\"SemiBold\">
+                    <Button.Template>
+                        <ControlTemplate TargetType=\"Button\">
+                            <Border Background=\"#0067C0\" CornerRadius=\"6\">
+                                <ContentPresenter HorizontalAlignment=\"Center\" VerticalAlignment=\"Center\"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </StackPanel>
-        </Border>
+        </Grid>
     </Grid>
 </Window>
 '@
 
 \$reader = (New-Object System.Xml.XmlNodeReader ([xml]\$xml))
 \$window = [System.Windows.Markup.XamlReader]::Load(\$reader)
+
+# Apply Windows 11 Acrylic/Mica Backdrop
+\$window.Add_Loaded({
+    \$helper = New-Object System.Windows.Interop.WindowInteropHelper(\$window)
+    [Win11Effects]::EnableMica(\$helper.Handle, \$true)
+})
 
 \$commitMsg = \$window.FindName('CommitMsg')
 \$targetBranch = \$window.FindName('TargetBranch')
@@ -156,15 +225,12 @@ git commit -m "$commit_message"
 echo "Syncing with remote branch '$target_branch'..."
 case $strategy_idx in
     0)
-        # Rebase
         git pull --rebase origin "$target_branch"
         ;;
     1)
-        # Merge
         git pull origin "$target_branch" --no-rebase
         ;;
     2)
-        # Force push warning / handle
         echo "Caution: Force push selected."
         ;;
 esac

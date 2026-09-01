@@ -1,7 +1,7 @@
 #!/bin/bash
 # ======================================================
 # Advanced Git Control Center
-# Style: Windows 11 Fluent Design (Mica / Acrylic)
+# Style: Windows 10 & 11 Modern Dark Theme
 # Features: Dynamic transparency, Branching, Staging view
 # ======================================================
 
@@ -18,28 +18,29 @@ fi
 # Format git status for display
 formatted_status=$(echo "$status_summary" | sed 's/"/\\"/g' | awk '{print "• " $0}')
 
-# 2. Open Windows 11 Fluent Control Panel with Mica Transparency
+# 2. Open Modern Control Panel (Windows 10 & 11 Compatible)
 gui_output=$(powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "
 Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
 
-# Load DWM API for Windows 11 Backdrop / Transparency effects
 \$code = @'
 using System;
 using System.Runtime.InteropServices;
 
-public class Win11Effects {
+public class WinEffects {
     [DllImport(\"dwmapi.dll\")]
     public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
 
-    public static void EnableMica(IntPtr hwnd, bool darkTheme) {
-        // Dark Mode Attribute (DWMWA_USE_IMMERSIVE_DARK_MODE = 20)
-        int darkMode = darkTheme ? 1 : 0;
-        DwmSetWindowAttribute(hwnd, 20, ref darkMode, sizeof(int));
+    public static void ApplyTheme(IntPtr hwnd) {
+        try {
+            // Enable Dark Mode Title Bar (Works on Win10 1809+ and Win11)
+            int darkMode = 1;
+            DwmSetWindowAttribute(hwnd, 20, ref darkMode, sizeof(int));
+            DwmSetWindowAttribute(hwnd, 19, ref darkMode, sizeof(int));
 
-        // Backdrop Type Attribute (DWMWA_SYSTEMBACKDROP_TYPE = 38)
-        // 2 = Mica, 3 = Acrylic, 4 = Tabbed
-        int backdrop = 3; 
-        DwmSetWindowAttribute(hwnd, 38, ref backdrop, sizeof(int));
+            // Windows 11 Mica/Acrylic Backdrop (Ignored safely on Windows 10)
+            int backdrop = 3; 
+            DwmSetWindowAttribute(hwnd, 38, ref backdrop, sizeof(int));
+        } catch { }
     }
 }
 '@
@@ -50,8 +51,9 @@ Add-Type -TypeDefinition \$code
         xmlns:x=\"http://schemas.microsoft.com/winfx/2006/xaml\"
         Title=\"Git Control Center\" Height=\"500\" Width=\"540\" 
         WindowStartupLocation=\"CenterScreen\" ResizeMode=\"NoResize\"
-        Background=\"#80181818\" Foreground=\"#FFFFFF\" FontFamily=\"Segoe UI Variable Text, Segoe UI\">
+        Background=\"#1E1E1E\" Foreground=\"#FFFFFF\" FontFamily=\"Segoe UI Variable Text, Segoe UI\">
     <Window.Resources>
+        <!-- Custom TextBox Style -->
         <Style TargetType=\"TextBox\">
             <Setter Property=\"Background\" Value=\"#2D2D2D\"/>
             <Setter Property=\"Foreground\" Value=\"#FFFFFF\"/>
@@ -72,11 +74,66 @@ Add-Type -TypeDefinition \$code
             </Setter>
         </Style>
 
-        <Style TargetType=\"ComboBox\">
+        <!-- Custom ComboBox Item Style -->
+        <Style TargetType=\"ComboBoxItem\">
             <Setter Property=\"Background\" Value=\"#2D2D2D\"/>
             <Setter Property=\"Foreground\" Value=\"#FFFFFF\"/>
+            <Setter Property=\"Padding\" Value=\"8,6\"/>
+            <Setter Property=\"Template\">
+                <Setter.Value>
+                    <ControlTemplate TargetType=\"ComboBoxItem\">
+                        <Border x:Name=\"Bd\" Background=\"{TemplateBinding Background}\" Padding=\"{TemplateBinding Padding}\">
+                            <ContentPresenter HorizontalAlignment=\"Left\" VerticalAlignment=\"Center\"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property=\"IsMouseOver\" Value=\"True\">
+                                <Setter TargetName=\"Bd\" Property=\"Background\" Value=\"#0067C0\"/>
+                            </Trigger>
+                            <Trigger Property=\"IsSelected\" Value=\"True\">
+                                <Setter TargetName=\"Bd\" Property=\"Background\" Value=\"#383838\"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Custom ComboBox Style -->
+        <Style TargetType=\"ComboBox\">
+            <Setter Property=\"Foreground\" Value=\"#FFFFFF\"/>
+            <Setter Property=\"Background\" Value=\"#2D2D2D\"/>
             <Setter Property=\"BorderBrush\" Value=\"#404040\"/>
-            <Setter Property=\"Padding\" Value=\"8,4\"/>
+            <Setter Property=\"BorderThickness\" Value=\"1\"/>
+            <Setter Property=\"Template\">
+                <Setter.Value>
+                    <ControlTemplate TargetType=\"ComboBox\">
+                        <Grid Name=\"MainGrid\">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=\"*\"/>
+                                <ColumnDefinition Width=\"30\"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.ColumnSpan=\"2\" Background=\"#2D2D2D\" BorderBrush=\"#404040\" BorderThickness=\"1\" CornerRadius=\"6\"/>
+                            <ContentPresenter Margin=\"10,0,0,0\" VerticalAlignment=\"Center\" HorizontalAlignment=\"Left\" Content=\"{TemplateBinding SelectionBoxItem}\" ContentTemplate=\"{TemplateBinding SelectionBoxItemTemplate}\" ContentTemplateSelector=\"{TemplateBinding ItemTemplateSelector}\" IsHitTestVisible=\"False\"/>
+                            <ToggleButton Grid.Column=\"1\" Background=\"Transparent\" BorderBrush=\"Transparent\" IsChecked=\"{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}\">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType=\"ToggleButton\">
+                                        <Border Background=\"Transparent\">
+                                            <Path Data=\"M 0 0 L 4 4 L 8 0 Z\" Fill=\"#FFFFFF\" HorizontalAlignment=\"Center\" VerticalAlignment=\"Center\"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <Popup Name=\"PART_Popup\" IsOpen=\"{TemplateBinding IsDropDownOpen}\" Placement=\"Bottom\" PopupAnimation=\"Slide\" AllowDrop=\"True\">
+                                <Border Name=\"DropDownBorder\" Background=\"#2D2D2D\" BorderBrush=\"#404040\" BorderThickness=\"1\" CornerRadius=\"6\" Margin=\"0,2,0,0\" MinWidth=\"{TemplateBinding ActualWidth}\">
+                                    <ScrollViewer x:Name=\"DropDownScrollViewer\">
+                                        <ItemsPresenter x:Name=\"ItemsPresenter\" KeyboardNavigation.DirectionalNavigation=\"Contained\"/>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
 
@@ -105,7 +162,7 @@ Add-Type -TypeDefinition \$code
         <StackPanel Grid.Row=\"2\" Margin=\"0,0,0,16\">
             <TextBlock Text=\"Staged Files Preview\" FontSize=\"12\" FontWeight=\"Medium\" Foreground=\"#D0D0D0\" Margin=\"0,0,0,6\"/>
             <Border Background=\"#202020\" BorderBrush=\"#383838\" BorderThickness=\"1\" CornerRadius=\"8\" Padding=\"12\">
-                <ScrollViewer VerticalScrollBarVisibility=\"Auto\" Height=\"110\">
+                <ScrollViewer Height=\"110\" VerticalScrollBarVisibility=\"Auto\">
                     <TextBlock Name=\"StatusBox\" Text=\"$formatted_status\" FontSize=\"11\" FontFamily=\"Cascadia Code, Consolas\" Foreground=\"#76B9ED\"/>
                 </ScrollViewer>
             </Border>
@@ -166,10 +223,10 @@ Add-Type -TypeDefinition \$code
 \$reader = (New-Object System.Xml.XmlNodeReader ([xml]\$xml))
 \$window = [System.Windows.Markup.XamlReader]::Load(\$reader)
 
-# Apply Windows 11 Acrylic/Mica Backdrop
+# Apply Theme attributes safely
 \$window.Add_Loaded({
     \$helper = New-Object System.Windows.Interop.WindowInteropHelper(\$window)
-    [Win11Effects]::EnableMica(\$helper.Handle, \$true)
+    [WinEffects]::ApplyTheme(\$helper.Handle)
 })
 
 \$commitMsg = \$window.FindName('CommitMsg')

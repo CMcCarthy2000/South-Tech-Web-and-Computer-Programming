@@ -1,8 +1,6 @@
 #!/bin/bash
 # ======================================================
 # Advanced Git Control Center
-# Style: Windows 10 & 11 Modern Dark Theme
-# Features: Dynamic transparency, Branching, Staging view
 # ======================================================
 
 # 1. Gather current Git context

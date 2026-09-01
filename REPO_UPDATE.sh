@@ -3,7 +3,7 @@
 # Shell script that checks every file in this repo
 # and pushes it to the main repository located on github
 # Created 8/26/2026
-# Updated 9/01/2026 with Windows 11 WPF Popup Input
+# Updated 9/01/2026 with Windows 11 WPF Popup & Auto-Sync
 # ======================================================
 
 # 1. Open a modern Windows 11 styled WPF window for the commit message
@@ -58,13 +58,17 @@ if [ -z "$commit_message" ]; then
     exit 1
 fi
 
-# 4. Run your original git sequence using your custom input
+# 4. Stage and commit local changes
 git add .
-
 git commit -m "$commit_message"
 
-git push
+# 5. Fetch remote updates and rebase local commits on top
+echo "Pulling latest changes from remote..."
+git pull --rebase origin main
 
-# 5. Keep terminal open after execution
+# 6. Push to the main repository
+git push origin main
+
+# 7. Keep terminal open after execution
 echo ""
 read -p "Process complete. Press Enter to close terminal..."

@@ -1,7 +1,7 @@
 #!/bin/bash
 # ======================================================
 # Advanced Git Control Center
-# Style: True Windows Acrylic (Liquid Glass)
+# Style: Windows 11 Native Desktop Acrylic
 # ======================================================
 
 set +o histexpand
@@ -29,50 +29,31 @@ using System.Runtime.InteropServices;
 
 public class WinEffects {
     [StructLayout(LayoutKind.Sequential)]
-    internal struct WindowCompositionAttributeData {
-        public int Attribute;
-        public IntPtr Data;
-        public int SizeOfData;
+    public struct MARGINS {
+        public int cxLeftWidth;
+        public int cxRightWidth;
+        public int cyTopHeight;
+        public int cyBottomHeight;
     }
 
-    [StructLayout(LayoutKind.Sequential)]
-    internal struct AccentPolicy {
-        public int AccentState;
-        public int AccentFlags;
-        public int GradientColor;
-        public int AnimationId;
-    }
-
-    [DllImport("user32.dll")]
-    internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
+    [DllImport("dwmapi.dll")]
+    public static extern int DwmExtendFrameIntoClientArea(IntPtr hwnd, ref MARGINS pMarInset);
 
     [DllImport("dwmapi.dll")]
     public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
 
     public static void EnableAcrylic(IntPtr hwnd) {
-        // Enable Dark Mode Titlebar
+        // Enable Dark Mode Frame (DWMWA_USE_IMMERSIVE_DARK_MODE = 20)
         int darkMode = 1;
         DwmSetWindowAttribute(hwnd, 20, ref darkMode, sizeof(int));
 
-        // Define Accent Policy for Acrylic (State 4 = ACCENT_ENABLE_ACRYLICBLURBEHIND)
-        AccentPolicy policy = new AccentPolicy {
-            AccentState = 4, 
-            // Hex format for GradientColor: AABBGGRR. Here we use a dark translucent tint (approx #AA202020)
-            GradientColor = 0xAA202020 
-        };
+        // Extend Glass Frame into the entire Client Area
+        MARGINS margins = new MARGINS { cxLeftWidth = -1, cxRightWidth = -1, cyTopHeight = -1, cyBottomHeight = -1 };
+        DwmExtendFrameIntoClientArea(hwnd, ref margins);
 
-        int structSize = Marshal.SizeOf(policy);
-        IntPtr accentPtr = Marshal.AllocHGlobal(structSize);
-        Marshal.StructureToPtr(policy, accentPtr, false);
-
-        WindowCompositionAttributeData data = new WindowCompositionAttributeData {
-            Attribute = 19, // WCA_ACCENT_POLICY
-            SizeOfData = structSize,
-            Data = accentPtr
-        };
-
-        SetWindowCompositionAttribute(hwnd, ref data);
-        Marshal.FreeHGlobal(accentPtr);
+        // Set System Backdrop to Desktop Acrylic (DWMWA_SYSTEMBACKDROP_TYPE = 38, DWMSBT_TRANSIENTWINDOW = 3)
+        int backdrop = 3; 
+        DwmSetWindowAttribute(hwnd, 38, ref backdrop, sizeof(int));
     }
 }
 "@
@@ -85,64 +66,67 @@ $xml = @"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
         Background="Transparent" Foreground="#FFFFFF" FontFamily="Segoe UI Variable Text, Segoe UI">
     
-    <!-- Transparent Window Chrome to allow OS Acrylic to show -->
-    <WindowChrome.WindowChrome>
-        <WindowChrome GlassFrameThickness="-1" CaptionHeight="30"/>
-    </WindowChrome.WindowChrome>
+    <!-- Microsoft Acrylic Recipe: Luminosity + Dark Tint Overlay -->
+    <Grid Background="#C0141414">
+        <Grid Margin="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-    <Grid Margin="24">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0" Margin="0,0,0,18">
-            <TextBlock Text="Git Control Center" FontSize="22" FontWeight="SemiBold" Foreground="#FFFFFF"/>
-            <TextBlock Text="Configure commit details, branches, and push options" FontSize="12" Foreground="#D0D0D0" Margin="0,2,0,0"/>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1" Margin="0,0,0,16">
-            <TextBlock Text="Commit Message" FontSize="12" FontWeight="Medium" Foreground="#E0E0E0" Margin="0,0,0,6"/>
-            <TextBox Name="CommitMsg" Height="36" VerticalContentAlignment="Center" FontSize="13" Background="#40101010" Foreground="#FFFFFF" BorderBrush="#50FFFFFF" BorderThickness="1"/>
-        </StackPanel>
-
-        <StackPanel Grid.Row="2" Margin="0,0,0,16">
-            <TextBlock Text="Staged Files Preview" FontSize="12" FontWeight="Medium" Foreground="#E0E0E0" Margin="0,0,0,6"/>
-            <Border Background="#30000000" BorderBrush="#50FFFFFF" BorderThickness="1" CornerRadius="8" Padding="12">
-                <ScrollViewer Height="110" VerticalScrollBarVisibility="Auto">
-                    <TextBlock Name="StatusBox" FontSize="11" FontFamily="Cascadia Code, Consolas" Foreground="#76B9ED"/>
-                </ScrollViewer>
-            </Border>
-        </StackPanel>
-
-        <Grid Grid.Row="3" Margin="0,0,0,24">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="16"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0">
-                <TextBlock Text="Target Branch" FontSize="12" FontWeight="Medium" Foreground="#E0E0E0" Margin="0,0,0,6"/>
-                <TextBox Name="TargetBranch" Height="34" VerticalContentAlignment="Center" FontSize="12" Background="#40101010" Foreground="#FFFFFF" BorderBrush="#50FFFFFF" BorderThickness="1"/>
+            <StackPanel Grid.Row="0" Margin="0,0,0,18">
+                <TextBlock Text="Git Control Center" FontSize="22" FontWeight="SemiBold" Foreground="#FFFFFF"/>
+                <TextBlock Text="Configure commit details, branches, and push options" FontSize="12" Foreground="#B0FFFFFF" Margin="0,2,0,0"/>
             </StackPanel>
-            <StackPanel Grid.Column="2">
-                <TextBlock Text="Sync Strategy" FontSize="12" FontWeight="Medium" Foreground="#E0E0E0" Margin="0,0,0,6"/>
-                <ComboBox Name="SyncStrategy" Height="34" SelectedIndex="0" FontSize="12" VerticalContentAlignment="Center" Background="#40101010" Foreground="#FFFFFF" BorderBrush="#50FFFFFF" BorderThickness="1">
-                    <ComboBoxItem Content="Rebase (Recommended)" Background="#2D2D2D"/>
-                    <ComboBoxItem Content="Merge" Background="#2D2D2D"/>
-                    <ComboBoxItem Content="Force Push (Caution)" Background="#2D2D2D"/>
-                </ComboBox>
-            </StackPanel>
-        </Grid>
 
-        <Grid Grid.Row="4">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="CancelBtn" Content="Cancel" Width="90" Height="34" Margin="0,0,10,0" Background="#40101010" Foreground="#FFFFFF" BorderBrush="#50FFFFFF" BorderThickness="1"/>
-                <Button Name="PushBtn" Content="Commit &amp; Push" Width="130" Height="34" IsDefault="True" Background="#900067C0" Foreground="#FFFFFF" BorderBrush="#50FFFFFF" BorderThickness="1"/>
+            <StackPanel Grid.Row="1" Margin="0,0,0,16">
+                <TextBlock Text="Commit Message" FontSize="12" FontWeight="Medium" Foreground="#E0E0E0" Margin="0,0,0,6"/>
+                <TextBox Name="CommitMsg" Height="36" VerticalContentAlignment="Center" FontSize="13" Padding="8,0,8,0"
+                         Background="#25FFFFFF" Foreground="#FFFFFF" BorderBrush="#40FFFFFF" BorderThickness="1"/>
             </StackPanel>
+
+            <StackPanel Grid.Row="2" Margin="0,0,0,16">
+                <TextBlock Text="Staged Files Preview" FontSize="12" FontWeight="Medium" Foreground="#E0E0E0" Margin="0,0,0,6"/>
+                <Border Background="#20FFFFFF" BorderBrush="#30FFFFFF" BorderThickness="1" CornerRadius="6" Padding="12">
+                    <ScrollViewer Height="110" VerticalScrollBarVisibility="Auto">
+                        <TextBlock Name="StatusBox" FontSize="11" FontFamily="Cascadia Code, Consolas" Foreground="#76B9ED"/>
+                    </ScrollViewer>
+                </Border>
+            </StackPanel>
+
+            <Grid Grid.Row="3" Margin="0,0,0,24">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Target Branch" FontSize="12" FontWeight="Medium" Foreground="#E0E0E0" Margin="0,0,0,6"/>
+                    <TextBox Name="TargetBranch" Height="34" VerticalContentAlignment="Center" FontSize="12" Padding="8,0,8,0"
+                             Background="#25FFFFFF" Foreground="#FFFFFF" BorderBrush="#40FFFFFF" BorderThickness="1"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Sync Strategy" FontSize="12" FontWeight="Medium" Foreground="#E0E0E0" Margin="0,0,0,6"/>
+                    <ComboBox Name="SyncStrategy" Height="34" SelectedIndex="0" FontSize="12" VerticalContentAlignment="Center"
+                              Background="#25FFFFFF" Foreground="#FFFFFF" BorderBrush="#40FFFFFF" BorderThickness="1">
+                        <ComboBoxItem Content="Rebase (Recommended)" Background="#2D2D2D" Foreground="#FFFFFF"/>
+                        <ComboBoxItem Content="Merge" Background="#2D2D2D" Foreground="#FFFFFF"/>
+                        <ComboBoxItem Content="Force Push (Caution)" Background="#2D2D2D" Foreground="#FFFFFF"/>
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="4">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Name="CancelBtn" Content="Cancel" Width="90" Height="34" Margin="0,0,10,0" 
+                            Background="#25FFFFFF" Foreground="#FFFFFF" BorderBrush="#40FFFFFF" BorderThickness="1"/>
+                    <Button Name="PushBtn" Content="Commit &amp; Push" Width="130" Height="34" IsDefault="True" 
+                            Background="#0067C0" Foreground="#FFFFFF" BorderThickness="0"/>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
@@ -154,11 +138,11 @@ $window = [System.Windows.Markup.XamlReader]::Load($reader)
 $window.Add_SourceInitialized({
     $helper = New-Object System.Windows.Interop.WindowInteropHelper($window)
     
-    # Fix the WPF Black Background
+    # Make WPF composition target transparent so Windows DWM backdrop shows through
     $hwndSource = [System.Windows.Interop.HwndSource]::FromHwnd($helper.Handle)
     $hwndSource.CompositionTarget.BackgroundColor = [System.Windows.Media.Colors]::Transparent
     
-    # Apply True Acrylic
+    # Apply native Windows 11 Desktop Acrylic
     [WinEffects]::EnableAcrylic($helper.Handle)
 })
 

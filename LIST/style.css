@@ -1,0 +1,36 @@
+nav {
+    background-color: #6F4930;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration-color: #FFFFFF;
+    color: #FFFFFF;
+}
+
+a:hover {
+    text-decoration-color: #C56C39;
+    color: #FFFFFF;
+}
+
+body {
+
+    /* yes im putting the page in comic sans */
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color:white;
+    background-color: #ffffff;
+    background-size: 100%;
+    background-image: url(Hubble_Hero.png);
+    background-blend-mode: multiply; 
+}
+
+.logo {
+    height: 60px;
+    display: flex;
+    float: left;
+}
+
+span {
+    font-weight: bold;
+}

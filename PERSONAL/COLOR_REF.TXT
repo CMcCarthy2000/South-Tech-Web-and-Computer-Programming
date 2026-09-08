@@ -1,0 +1,21 @@
+Here are some color palettes for the site
+
+==================
+    OPTION 1
+==================
+
+#FFFFFA - Porcelain
+#515052 - Charcoal
+#000103 - Black
+#333138 - Graphite
+#FF312E - Cinnabar
+
+==================
+    OPTION 2
+==================
+
+#DBC2CF - Thistle
+#9FA2B2 - Lavender Grey
+#3C7A89 - Cerulean
+#2E4756 - Charcoal Blue
+#16262E - Jet Black

@@ -29,11 +29,50 @@
 
                     // call the `updateDateTime` function every second
                     setInterval(updateDateTime, 1000);
+                    
+                    function calculateYearsAndDays() {
+  const timeBox = document.getElementById("time-elapsed");
+  if (!timeBox) return;
+
+  const pastDate = new Date("2009-06-18T00:00:00");
+  const nowDate = new Date();
+
+  // 1. Calculate the rough difference in years
+  let years = nowDate.getFullYear() - pastDate.getFullYear();
+
+  // 2. Adjust years if the current date hasn't reached June 18th yet this year
+  const currentAnniversary = new Date(nowDate.getFullYear(), pastDate.getMonth(), pastDate.getDate());
+  if (nowDate < currentAnniversary) {
+    years--;
+  }
+
+  // 3. Find the most recent anniversary date
+  const lastAnniversary = new Date(pastDate.getFullYear() + years, pastDate.getMonth(), pastDate.getDate());
+
+  // 4. Calculate the remaining days between the last anniversary and today
+  const msDifference = nowDate - lastAnniversary;
+  const days = Math.floor(msDifference / (1000 * 60 * 60 * 24));
+
+  // 5. Output the result cleanly
+  timeBox.innerHTML = `${years} years, ${days} days`;
+}
+
+// Safely initializes the script after your existing HTML finishes loading
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", calculateYearsAndDays);
+} else {
+  calculateYearsAndDays();
+}
+
                 </script>
             </h1>
+            
         </center>
 
     </header>
+
+
+
     <body>
 
         <audio autoplay loop>
@@ -42,12 +81,14 @@
         </audio>
 
         <h1 class="WELCOME-TEXT">welcome</h1>
-        <p>test paragraph</p>
+        <p><em>Welcome to my webpage!</em> My name is Conor McCarthy, im<div class="tracker-container"><div id="time-elapsed">Calculating...</div></div>years old</p>
+
+
         <main>
             <footer style="bottom: 0; left: 0; position: absolute;">
         <nav>
-            <a href="INDEX.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON9_1.ico" class="icon"></a><a href="PROJECTS.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON152_1.ico" class="icon"></a>
-            <a href="PHOTOS.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON273_1.ico" class="icon"></a><a href="ABOUT.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON12_1.ico" class="icon"></a>
+            <a href="INDEX.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON16_1.ico" class="icon"></a><a href="PROJECTS.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON9_1.ico" class="icon"></a>
+            <a href="PHOTOS.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON317_1.ico" class="icon"></a><a href="ABOUT.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON24_1.ico" class="icon"></a>
         </nav>
         <br>
             </footer>

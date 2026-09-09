@@ -1,20 +1,20 @@
 body {
-     background-image: url(img/LOGIN.JPEG);
-     background-size: cover;
+     background-image: url(IMG/LOGIN.JPEG);
+     background-size: 100vw 100vh;
      background-repeat: no-repeat;
      font-family: Tahoma, sans-serif;
      color: #FFFFFF;
      margin: 0;
-     
+     padding-left: 10px;
 }
  h1 {
      font-family: Franklin Gothic Medium, sans-serif;
     /* Keep this in here even though its not working on the page */
 }
  nav {
-     background-color: #245DDA;
+     /* background-color: #245DDA; */
      margin: 0;
-     padding: 0;
+     padding-left: 10px;
      height: 25px;
      
 }
@@ -59,6 +59,23 @@ body {
   font-smooth: never !important;
 }
 
+/*
+.vertical-line {
+  border-left: 2px solid #000000;
+  height: 100px;
+  margin: 0 20px;           
+  display: inline-block;
+}
+
+*/
+
+.icon {
+  height: 40px;
+}
+
+.shadow {
+  margin: 0;
+}
 
 .WELCOME-TEXT {
   font-family: 'Franklin Gothic Medium', 'Arial Black', sans-serif !important;

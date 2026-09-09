@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Template</title>
+        <title>Home</title>
         <link rel="stylesheet" href="style.css" />
         <meta charset="UTF-8" />
         <meta name="description" content="" />
@@ -11,7 +11,7 @@
     </head>
     <header>
         <center>
-            <h1>
+            <h1 class="shadow">
                 The current time is <span id="datetime"></span>
                 <noscript>Javascript is disabled, enable Javascript to enable extra features on this webpage</noscript>
                 <script>
@@ -32,18 +32,25 @@
                 </script>
             </h1>
         </center>
-        <nav>
-            <a href="INDEX.HTML" class="active">Home</a> | <a href="PROJECTS.HTML">Projects</a> |
-            <a href="PHOTOS.HTML">Photos</a> | <a href="ABOUT.HTML">About</a>
-        </nav>
+
     </header>
     <body>
+
+        <audio autoplay loop>
+            <source src="AUDIO/Title.mp3" type="audio/mp3">
+              Your browser does not support the audio element.
+        </audio>
 
         <h1 class="WELCOME-TEXT">welcome</h1>
         <p>test paragraph</p>
         <main>
-
-            <footer></footer>
+            <footer style="bottom: 0; left: 0; position: absolute;">
+        <nav>
+            <a href="INDEX.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON9_1.ico" class="icon"></a><a href="PROJECTS.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON152_1.ico" class="icon"></a>
+            <a href="PHOTOS.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON273_1.ico" class="icon"></a><a href="ABOUT.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON12_1.ico" class="icon"></a>
+        </nav>
+        <br>
+            </footer>
         </main>
     </body>
 </html>

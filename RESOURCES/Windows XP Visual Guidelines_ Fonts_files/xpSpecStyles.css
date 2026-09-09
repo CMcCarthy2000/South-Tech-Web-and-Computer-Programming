@@ -1,0 +1,270 @@
+BODY
+{
+	margin: 0;
+	margin-right: 30;
+	font: 11pt Arial;
+	font-weight: bold;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+		
+A:link      { color: #265CC0; text-decoration:none; }
+A:visited 	{ color: #265CC0; text-decoration:none; }
+A:active 	{ color: #265CC0;  cursor:hand; text-decoration:none; }
+A:hover 	{ color: #4D9FE1;  cursor:hand; text-decoration:"underline"; }
+		
+A.bodyLink:link     { color: #265CC0; text-decoration:none; font-weight:bold; }
+A.bodyLink:visited 	{ color: #265CC0; text-decoration:none; font-weight:bold; }
+A.bodyLink:active 	{ color: #265CC0;  cursor:hand; text-decoration:none; font-weight:bold; }
+A.bodyLink:hover 	{ color: #4D9FE1;  cursor:hand; text-decoration:"underline"; font-weight:bold; }
+		
+A.topLink:link      { color: #163A6E; text-decoration:none; font-weight: normal; }
+A.topLink:visited 	{ color: #163A6E; text-decoration:none; font-weight: normal; }
+A.topLink:active 	{ color: #163A6E;  cursor:hand; text-decoration:none; font-weight: normal; }
+A.topLink:hover 	{ color: #4D9FE1;  cursor:hand; text-decoration:"underline"; font-weight: normal; }
+
+
+/* START: Navigation Style Elements */
+/*----------------------------------*/		
+
+		
+		/*Header elements */
+		.navHeaderText
+			{
+			color: white;
+			font-weight: bold;
+			letter-spacing: .1em;
+			}
+			
+		.navHeaderTextBlue
+			{
+			color: #333399;
+			font-weight: bold;
+			letter-spacing: .1em;
+			}
+			
+		/*Body text elements*/
+		.navBodyText
+			{
+				font: 10pt Arial;
+				font-weight: bold;
+				color: #333399;
+			}
+			
+		.navBodyTextHilite
+			{
+				font: 10pt Arial;
+				color: #DE5C2F;
+				font-weight: bold;
+			}
+		
+		.subNavBodyText
+			{
+				font: 10pt Arial;
+				color: #333399;
+			}	
+			
+		#navwrapper
+			{
+				position: absolute;
+				left:10;
+				top:205;
+			}		
+
+/* END: Navigation Style Elements */
+/*----------------------------------*/
+
+
+/* START: Title Formatting Elements */
+/*----------------------------------*/
+#titleBlock
+	{
+		font: 10pt Verdana;
+		font-weight: bold;
+		color: #333399;
+	}
+	
+#titleTimestamp
+	{
+		font: 9pt Verdana;
+		font-weight: bold;
+		color: #DE5C2F;
+	}
+	
+/* END: Title Formatting Elements */
+/*----------------------------------*/
+
+/*****************************/		
+/* START: Content Style Elements */
+
+
+P
+	{
+		font-family: Verdana;
+		font-size: 10pt;
+		color: #265CC0;
+		padding-left: 15;
+	}
+	
+.bodyStd
+	{
+		font-family: Verdana;
+		font-size: 10pt;
+		color: #265CC0;
+	}
+	
+	
+TD 
+	{
+		font-family: Verdana;
+		font-size: 10pt;
+		color: #265CC0;
+	}
+	
+OL, UL
+	{
+		font-family: Verdana;
+		font-size: 10pt;
+		color: #265CC0;
+		padding-left: 45;
+	}
+
+/* Two styles below are necessary in Netscape 4 after a table embedded in a list */
+LI.subSectionStd
+	{
+		font-family: Verdana;
+		font-size: 10pt;
+		color: #265CC0;
+	}
+	
+.subSectionStd
+	{
+		font-family: Verdana;
+		font-size: 10pt;
+		color: #265CC0;
+	}
+	
+.bodyOrange
+	{
+		color: #DE5C2F;
+	}
+	
+.topLink
+	{
+		font-family: Verdana;
+		font-size: 8pt;
+		font-weight: normal;
+		color: #265CC0;
+	}
+
+H1
+	{
+		font-family: Verdana;
+		font-size: 15pt;
+		color: #265CC0;
+	}
+
+H2
+	{
+		font-family: Verdana;
+		font-size: 12pt;
+		margin-top: 30;
+		color: #265CC0;
+		margin-bottom: -15;
+	}
+	
+H2.noBtmMargin
+	{
+	margin-bottom: 0;
+	}
+
+H3
+	{
+		font-family: Verdana;
+		font-size: 10pt;
+		margin-bottom: -15;
+		color: #265CC0;
+		padding-left: 15;
+	}
+	
+.colorFontDescrip
+	{
+		font-size: 12;
+	}
+	
+.colorFontTitle
+	{
+		font-size: 12;
+		font-weight: bold;
+		padding-left: 10;
+	}
+	
+.revisionsHdr
+	{
+		color: white;
+		font-size: 11;
+		font-weight: bold;
+	}
+	
+.revisionsBody	
+	{
+		font-size: 11;
+	}
+	
+.fontTable
+	{
+		font-size: 12;
+	}
+	
+.bodytextIndent1
+	{
+		margin-left: 30;
+	}
+	
+.bodytextIndent2
+	{
+		margin-left: 40;
+	}
+	
+.bodytextIndent3
+	{
+		margin-left: 50;
+	}	
+	
+.bodytextIndent4
+	{
+		margin-left: 60;
+	}
+	
+.imgCaption
+	{
+		font-family: Verdana;
+		font-size: 8pt;
+		color: #008500;
+	}
+	
+/* Used for the cover small text.  */
+
+.smallText
+	{
+		font-size: 7pt;
+	}
+
+.mediumText
+	{
+		font-size: 8pt;
+	}
+	
+.introLtr
+	{
+		font-size: 9pt;
+		line-height: 130%;
+		font-weight: bold;
+		/* color: #008500; */
+	}
+	
+#exmplPopup
+	{
+		cursor: hand;
+		color: #DE5C2F;
+	}	

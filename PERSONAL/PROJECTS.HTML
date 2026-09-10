@@ -10,42 +10,112 @@
         <!-- Placeholder favicon -->
     </head>
     <header>
+        <br>
         <center>
             <h1 class="shadow">
                 The current time is <span id="datetime"></span>
                 <noscript>Javascript is disabled, enable Javascript to enable extra features on this webpage</noscript>
                 <script>
-                    // create a function to update the date and time
+                    // Function to update the date and time
                     function updateDateTime() {
-                        // create a new `Date` object
                         const now = new Date();
-
-                        // get the current date and time as a string
                         const currentDateTime = now.toLocaleString();
-
-                        // update the `textContent` property of the `span` element with the `id` of `datetime`
                         document.querySelector("#datetime").textContent = currentDateTime;
                     }
 
-                    // call the `updateDateTime` function every second
+                    // Call the updateDateTime function every second
                     setInterval(updateDateTime, 1000);
+                    
+                    function calculateExactTimeElapsed() {
+                        // FIX: Updated target ID to match the HTML span below
+                        const timeBox = document.getElementById("time-elapsed");
+                        if (!timeBox) return;
+
+                        // Set the precise start date and time (June 18, 2009, at 6:30 PM)
+                        const pastDate = new Date("2009-06-18T18:30:00");
+                        const nowDate = new Date();
+
+                        // 1. Calculate the rough difference in years
+                        let years = nowDate.getFullYear() - pastDate.getFullYear();
+
+                        // 2. Adjust years if the current time hasn't reached 6:30 PM on June 18th yet this year
+                        const currentAnniversary = new Date(
+                            nowDate.getFullYear(), 
+                            pastDate.getMonth(), 
+                            pastDate.getDate(),
+                            pastDate.getHours(),
+                            pastDate.getMinutes()
+                        );
+                        if (nowDate < currentAnniversary) {
+                            years--;
+                        }
+
+                        // 3. Find the most recent exact anniversary date and time
+                        const lastAnniversary = new Date(
+                            pastDate.getFullYear() + years, 
+                            pastDate.getMonth(), 
+                            pastDate.getDate(),
+                            pastDate.getHours(),
+                            pastDate.getMinutes()
+                        );
+
+                        // 4. Calculate the total remaining milliseconds since the last anniversary
+                        let msDifference = nowDate - lastAnniversary;
+
+                        // 5. Break down the remaining milliseconds into precise days, hours, and minutes
+                        const msPerDay = 1000 * 60 * 60 * 24;
+                        const msPerHour = 1000 * 60 * 60;
+                        const msPerMinute = 1000 * 60;
+
+                        const days = Math.floor(msDifference / msPerDay);
+                        msDifference %= msPerDay; 
+
+                        const hours = Math.floor(msDifference / msPerHour);
+                        msDifference %= msPerHour; 
+
+                        const minutes = Math.floor(msDifference / msPerMinute);
+
+                        // 6. Output the precise result layout
+                        timeBox.innerHTML = `${years} years, ${days} days, ${hours} hours, and ${minutes} minutes`;
+                    }
+
+                    // Run the calculation immediately, then update it live every minute
+                    function initAgeTracker() {
+                        calculateExactTimeElapsed();
+                        setInterval(calculateExactTimeElapsed, 60000);
+                    }
+
+                    // Safely initializes the script after your existing HTML finishes loading
+                    if (document.readyState === "loading") {
+                        document.addEventListener("DOMContentLoaded", initAgeTracker);
+                    } else {
+                        initAgeTracker();
+                    }
                 </script>
             </h1>
         </center>
-
     </header>
-    <body>
 
+    <body>
+        <br>
         <h1 class="WELCOME-TEXT">welcome</h1>
-        <p>test paragraph</p>
+        <br>
+        <!--
+<object data="SWF/intro.swf" width="800" height="200" type="application/x-shockwave-flash">
+  <param name="movie" value="animation.swf">
+  <param name="quality" value="high">
+  <p>Flash is not supported by this browser.</p>
+</object>
+-->
         <main>
             <footer style="bottom: 0; left: 0; position: absolute;">
-
-        <nav>
-            <a href="INDEX.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON16_1.ico" class="icon"></a><a href="PROJECTS.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON9_1.ico" class="icon"></a>
-            <a href="PHOTOS.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON317_1.ico" class="icon"></a><a href="ABOUT.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON24_1.ico" class="icon"></a>
-        </nav>
-        <br>
+                <nav>
+                    <a href="INDEX.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON16_1.ico" class="icon"></a>
+                    <a href="PROJECTS.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON9_1.ico" class="icon"></a>
+                    <a href="PHOTOS.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON317_1.ico" class="icon"></a>
+                    <a href="ABOUT.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON24_1.ico" class="icon"></a>
+                </nav>
+                <br>
             </footer>
         </main>
     </body>

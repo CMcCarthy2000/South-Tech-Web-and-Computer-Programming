@@ -1,85 +1,79 @@
+/* ==========================================
+   GLOBAL LAYOUT & RESET
+   ========================================== */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Prevents scrollbars from appearing */
+    font-family: Tahoma, sans-serif;
+    color: #FFFFFF;
+}
+
 body {
-     background-image: url(IMG/LOGIN.JPEG);
+     /* background-image: url(IMG/LOGIN.JPEG); */
      background-size: 100vw 100vh;
      background-repeat: no-repeat;
-     font-family: Tahoma, sans-serif;
-     color: #FFFFFF;
-     margin: 0;
-     padding-left: 10px;
 }
- h1 {
+
+h1 {
      font-family: Franklin Gothic Medium, sans-serif;
     /* Keep this in here even though its not working on the page */
 }
- nav {
-     /* background-color: #245DDA; */
-     margin: 0;
-     padding-left: 10px;
-     height: 25px;
-     
+
+/* ==========================================
+   WINDOWS XP CONTAINER LAYOUT
+   ========================================== */
+.TOP {
+    box-sizing: border-box;
+    /* Main dark blue filling 92% of the bar, transitioning into a 2px light-blue highlight line */
+    background: linear-gradient(to bottom, #003399 calc(100% - 2px), #a6bde7 100%);
+    height: 7.8vh;
+    width: 100%;
 }
- a {
-     text-decoration-color: #FFFFFF;
-     color: #FFFFFF;
+
+.MIDDLE {
+    box-sizing: border-box;
+    background-color: #5a7edc;
+    height: 84.4vh;
+    width: 100%;
+    /* Adds the soft white glow in the top-left corner */
+    background-image: radial-gradient(circle at 7% 15%, rgba(255, 255, 255, 0.45) 0%, transparent 22%);
 }
- a:hover {
-     text-decoration-color: #fed222;
-     color: #FFFFFF;
+
+.BOTTOM {
+    box-sizing: border-box;
+    /* 2px orange stripe at the very top edge, transitioning directly into the dark blue background */
+    background: linear-gradient(to bottom, #d25a12 2px, #003399 2px);
+    height: 7.8vh;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
- .logo {
+
+/* ==========================================
+   UI ELEMENTS & TEXT STYLES
+   ========================================== */
+.logo {
      height: 60px;
      display: flex;
      float: left;
 }
- span {
+
+span {
      font-weight: bold;
 }
-
-
-
-.WELCOME-TEXT {
-  font-family: 'Franklin Gothic Medium', 'Arial Black', sans-serif !important;
-  font-size: 70px;
-  font-weight: 900;
-  font-style: italic;
-  color: #ffffff;
-  letter-spacing: -3px;
-  display: inline-block;
-  padding: 0;
-  margin: 0;
-  
-  /* Layered sharp shadows to overwrite browser smoothing */
-  text-shadow: 
-    3px 3px 0px #3b4c80,
-    2.5px 2.5px 0px #3b4c80,
-    2px 2px 0px #3b4c80;
-    
-  -webkit-font-smoothing: none !important;
-  -moz-osx-font-smoothing: none !important;
-  font-smooth: never !important;
-}
-
-/*
-.vertical-line {
-  border-left: 2px solid #000000;
-  height: 100px;
-  margin: 0 20px;           
-  display: inline-block;
-}
-
-*/
-
-.icon {
-  height: 40px;
-}
-
-
-
 
 .shadow {
   margin: 0;
 }
 
+.bold-highlight {
+    font-weight: bold;
+}
+
 .WELCOME-TEXT {
   font-family: 'Franklin Gothic Medium', 'Arial Black', sans-serif !important;
   font-size: 70px;
@@ -100,4 +94,322 @@ body {
   -webkit-font-smoothing: none !important;
   -moz-osx-font-smoothing: none !important;
   font-smooth: never !important;
+}
+
+/* ==========================================
+   CONTENT POSITIONING WITHIN BANDS
+   ========================================== */
+
+/* Centers the clock text perfectly inside the top bar */
+.top-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Tahoma, sans-serif;
+}
+
+/* Gives the welcome text and bio nice padding away from the left screen edge */
+.middle-content {
+    padding-top: 60px;
+    padding-left: 30px;
+}
+
+.bio-text {
+    font-family: Tahoma, sans-serif;
+    font-size: 14px;
+    margin-top: 20px;
+    color: #ffffff;
+}
+
+/* ==========================================
+   WINDOWS XP FOOTER NAVIGATION
+   ========================================== */
+
+/* Centers the navigation row vertically inside the footer */
+.bottom-content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left: 25px;
+}
+
+/* Sets up the navigation row layout */
+.xp-nav {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Spaces the shortcuts cleanly apart from each other */
+    height: 100%;
+}
+
+/* Individual navigation link container */
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Spaces the text neatly to the right of the icon */
+    text-decoration: none;
+    font-family: Tahoma, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    color: #FFFFFF;
+    transition: filter 0.1s ease;
+}
+
+/* The hover interaction specified on Page 9 of the guidelines */
+.nav-item:hover {
+    color: #fed222; /* Changes the text to the classic XP hover gold */
+}
+
+/* Ensures your shortcut icons stay perfectly proportioned */
+.icon {
+    height: 32px; /* Authentic icon sizing rule from Page 42 */
+    width: auto;
+}
+
+/* ==========================================
+   WINDOWS XP EXPLORER WORKSPACE LAYOUT
+   ========================================== */
+.explorer-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* Left Pane Layout Sidebar Styles */
+.left-pane {
+    width: 240px;
+    background: linear-gradient(to bottom, #7495e8, #2359cb);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-sizing: border-box;
+}
+
+.task-box {
+    background-color: #f0f4f9;
+    border-radius: 4px 4px 0 0;
+    overflow: hidden;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.task-header {
+    background: linear-gradient(to right, #4d7ee7, #3361cb);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 5px 10px;
+    font-family: Tahoma, sans-serif;
+}
+
+.task-body {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.task-body a {
+    color: #215dc6; /* Official text color spec from manual Page 42 */
+    text-decoration: none;
+    font-size: 11px;
+}
+
+.task-body a:hover {
+    text-decoration: underline;
+    color: #316ac5;
+}
+
+/* Right Content Workspace Area Styles */
+.right-pane {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 25px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.folder-title {
+    color: #002e9b;
+    font-family: Tahoma, sans-serif;
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: normal;
+    border-bottom: 1px solid #b5cbe8;
+    padding-bottom: 8px;
+}
+
+/* Layout Project Content Grid Elements */
+.projects-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.project-card {
+    display: flex;
+    border: 1px solid #d2e1f4;
+    background-color: #fafdff;
+    border-radius: 4px;
+    padding: 12px;
+    align-items: center;
+    gap: 15px;
+}
+
+.project-card:hover {
+    border-color: #7f9db9;
+    background-color: #f0f7ff;
+}
+
+.project-icon-wrapper {
+    flex-shrink: 0;
+}
+
+.project-icon {
+    width: 48px; /* Standard asset viewport bounding from manual Page 17 */
+    height: 48px;
+}
+
+.project-info h3 {
+    margin: 0 0 4px 0;
+    color: #215dc6;
+    font-size: 15px;
+    font-family: Tahoma, sans-serif;
+}
+
+.project-info p {
+    margin: 0;
+    color: #4c4c4c;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* ==========================================
+   WINDOWS XP GALLERY & PICTURES LAYOUT
+   ========================================== */
+.picture-view-pane {
+    background-color: #ffffff;
+}
+
+/* Flexwrap grid rows layout */
+.gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+/* Individual Picture Card Component */
+.photo-thumbnail-card {
+    border: 1px solid #ccdbe5;
+    background-color: #ffffff;
+    padding: 6px;
+    width: 140px;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.photo-thumbnail-card:hover {
+    border-color: #316ac5;
+    background-color: #f2f7fd;
+}
+
+/* Centered photo viewport box context */
+.thumbnail-box {
+    width: 126px;
+    height: 100px;
+    background-color: #fafbfc;
+    border: 1px solid #e2e9f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+
+.gallery-img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+/* Caption text matching default Tahoma size labels (Page 42) */
+.photo-label {
+    font-family: Tahoma, sans-serif;
+    font-size: 11px;
+    color: #333333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ==========================================
+   WINDOWS XP "ABOUT SYSTEM" DASHBOARD
+   ========================================== */
+.about-sys-pane {
+    background-color: #ffffff;
+}
+
+/* Profiles account card header styles */
+.user-account-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: #f4f7fc;
+    border: 1px solid #d2e1f4;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 25px;
+}
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border: 2px solid #7f9db9;
+    border-radius: 4px;
+    background-color: #ffffff;
+}
+
+.user-profile-meta h2 {
+    margin: 0;
+    color: #002e9b;
+    font-size: 18px;
+    font-family: Tahoma, sans-serif;
+}
+
+.user-profile-meta p {
+    margin: 4px 0 0 0;
+    color: #555555;
+    font-size: 12px;
+}
+
+/* System summary item text & list alignments */
+.summary-intro {
+    color: #333333;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.xp-bullet-list {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.xp-bullet-list li {
+    font-family: Tahoma, sans-serif;
+    font-size: 13px;
+    color: #444444;
+    line-height: 1.4;
+}
+
+/* Official list arrow point indicator representation variant */
+.xp-bullet-list li::marker {
+    color: #4d7ee7;
 }

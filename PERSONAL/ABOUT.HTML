@@ -1,123 +1,176 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <title>About</title>
-        <link rel="stylesheet" href="style.css" />
-        <meta charset="UTF-8" />
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <link rel="icon" type="image/x-icon" href="favicon.ico" />
-        <!-- Placeholder favicon -->
-    </head>
-    <header>
-        <br>
-        <center>
-            <h1 class="shadow">
-                The current time is <span id="datetime"></span>
-                <noscript>Javascript is disabled, enable Javascript to enable extra features on this webpage</noscript>
-                <script>
-                    // Function to update the date and time
-                    function updateDateTime() {
-                        const now = new Date();
-                        const currentDateTime = now.toLocaleString();
-                        document.querySelector("#datetime").textContent = currentDateTime;
-                    }
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About</title>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
 
-                    // Call the updateDateTime function every second
-                    setInterval(updateDateTime, 1000);
+    <!-- 1. TOP BANNER: Real-time clock output -->
+    <div class="TOP">
+        <div class="top-content">
+            The current time is&nbsp; <span id="datetime"></span>
+        </div>
+    </div>
+
+    <!-- 2. MIDDLE AREA: Windows XP "Learn About" / System Information Layout -->
+    <div class="MIDDLE">
+        <div class="explorer-container">
+            
+            <!-- Left Panel: Help Topics Sidebar (Page 6 Specifications) -->
+            <div class="left-pane help-sidebar">
+                <div class="task-box">
+                    <div class="task-header">Learn About</div>
+                    <div class="task-body">
+                        <a href="#">System requirements</a>
+                        <a href="#">Changing your theme</a>
+                        <a href="#">Managing account profiles</a>
+                    </div>
+                </div>
+                
+                <div class="task-box secondary-box">
+                    <div class="task-header">Other Places</div>
+                    <div class="task-body">
+                        <a href="INDEX.HTML">My Computer</a>
+                        <a href="PROJECTS.HTML">My Projects</a>
+                        <a href="PHOTOS.HTML">My Pictures</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Main User Account / System Information Center -->
+            <div class="right-pane about-sys-pane">
+                <h1 class="folder-title">System Information</h1>
+                
+                <div class="user-account-header">
+                    <img src="IMG/SHELL32.DLL/ICON24_1.ico" class="user-avatar" alt="User Avatar" />
+                    <div class="user-profile-meta">
+                        <h2>Conor McCarthy</h2>
+                        <p>Computer Administrator / Full-Stack Hobbyist</p>
+                    </div>
+                </div>
+
+                <div class="sys-summary-content">
+                    <p class="summary-intro">With this website layout configured, you can review system variables or personal information:</p>
                     
-                    function calculateExactTimeElapsed() {
-                        // FIX: Updated target ID to match the HTML span below
-                        const timeBox = document.getElementById("time-elapsed");
-                        if (!timeBox) return;
+                    <!-- Authentic Bullet List Grouping (Page 6 Formatting) -->
+                    <ul class="xp-bullet-list">
+                        <li>
+                            <strong>Time Active:</strong> 
+                            <span id="time-elapsed" class="bold-highlight"></span>
+                        </li>
+                        <li>
+                            <strong>Core Skills:</strong> HTML5, CSS3 structural layout architecture, client-side JavaScript execution.
+                        </li>
+                        <li>
+                            <strong>Environment Specs:</strong> Styled following the Microsoft Luna visual presentation scheme.
+                        </li>
+                        <li>
+                            <strong>Biographical Summary:</strong> Use this placeholder item block to write a brief sentence or paragraph introducing yourself to web visitors.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
 
-                        // Set the precise start date and time (June 18, 2009, at 6:30 PM)
-                        const pastDate = new Date("2009-06-18T18:30:00");
-                        const nowDate = new Date();
+    <!-- 3. BOTTOM BANNER: Master system navigation row -->
+    <div class="BOTTOM">
+        <div class="bottom-content">
+            <nav class="xp-nav">
+                <a href="INDEX.HTML" class="nav-item active">
+                    <img src="IMG/SHELL32.DLL/ICON16_1.ico" class="icon" alt="Home" />
+                    <span>Home</span>
+                </a>
+                <a href="PROJECTS.HTML" class="nav-item active">
+                    <img src="IMG/SHELL32.DLL/ICON9_1.ico" class="icon" alt="Projects" />
+                    <span>Projects</span>
+                </a>
+                <a href="PHOTOS.HTML" class="nav-item active">
+                    <img src="IMG/SHELL32.DLL/ICON317_1.ico" class="icon" alt="Photos" />
+                    <span>Photos</span>
+                </a>
+                <a href="ABOUT.HTML" class="nav-item active">
+                    <img src="IMG/SHELL32.DLL/ICON24_1.ico" class="icon" alt="About" />
+                    <span>About</span>
+                </a>
+            </nav>
+        </div>
+    </div>
 
-                        // 1. Calculate the rough difference in years
-                        let years = nowDate.getFullYear() - pastDate.getFullYear();
+    <!-- DYNAMIC TIME TRACKER SCRIPT -->
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const currentDateTime = now.toLocaleString();
+            const dtBox = document.querySelector("#datetime");
+            if (dtBox) dtBox.textContent = currentDateTime;
+        }
 
-                        // 2. Adjust years if the current time hasn't reached 6:30 PM on June 18th yet this year
-                        const currentAnniversary = new Date(
-                            nowDate.getFullYear(), 
-                            pastDate.getMonth(), 
-                            pastDate.getDate(),
-                            pastDate.getHours(),
-                            pastDate.getMinutes()
-                        );
-                        if (nowDate < currentAnniversary) {
-                            years--;
-                        }
-
-                        // 3. Find the most recent exact anniversary date and time
-                        const lastAnniversary = new Date(
-                            pastDate.getFullYear() + years, 
-                            pastDate.getMonth(), 
-                            pastDate.getDate(),
-                            pastDate.getHours(),
-                            pastDate.getMinutes()
-                        );
-
-                        // 4. Calculate the total remaining milliseconds since the last anniversary
-                        let msDifference = nowDate - lastAnniversary;
-
-                        // 5. Break down the remaining milliseconds into precise days, hours, and minutes
-                        const msPerDay = 1000 * 60 * 60 * 24;
-                        const msPerHour = 1000 * 60 * 60;
-                        const msPerMinute = 1000 * 60;
-
-                        const days = Math.floor(msDifference / msPerDay);
-                        msDifference %= msPerDay; 
-
-                        const hours = Math.floor(msDifference / msPerHour);
-                        msDifference %= msPerHour; 
-
-                        const minutes = Math.floor(msDifference / msPerMinute);
-
-                        // 6. Output the precise result layout
-                        timeBox.innerHTML = `${years} years, ${days} days, ${hours} hours, and ${minutes} minutes`;
-                    }
-
-                    // Run the calculation immediately, then update it live every minute
-                    function initAgeTracker() {
-                        calculateExactTimeElapsed();
-                        setInterval(calculateExactTimeElapsed, 60000);
-                    }
-
-                    // Safely initializes the script after your existing HTML finishes loading
-                    if (document.readyState === "loading") {
-                        document.addEventListener("DOMContentLoaded", initAgeTracker);
-                    } else {
-                        initAgeTracker();
-                    }
-                </script>
-            </h1>
-        </center>
-    </header>
-
-    <body>
-        <audio autoplay loop>
-            <source src="AUDIO/Title.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
-        <br>
-        <h1 class="WELCOME-TEXT">welcome</h1>
+        setInterval(updateDateTime, 1000);
         
-        <p>
-            This page is the about me page and I will fill it out later.
-        </p>
+        function calculateExactTimeElapsed() {
+            const timeBox = document.getElementById("time-elapsed");
+            if (!timeBox) return;
 
-        <main>
-            <footer style="bottom: 0; left: 0; position: absolute;">
-                <nav>
-                    <a href="INDEX.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON16_1.ico" class="icon"></a>
-                    <a href="PROJECTS.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON9_1.ico" class="icon"></a>
-                    <a href="PHOTOS.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON317_1.ico" class="icon"></a>
-                    <a href="ABOUT.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON24_1.ico" class="icon"></a>
-                </nav>
-                <br>
-            </footer>
-        </main>
-    </body>
+            const pastDate = new Date("2009-06-18T18:30:00");
+            const nowDate = new Date();
+
+            let years = nowDate.getFullYear() - pastDate.getFullYear();
+
+            const currentAnniversary = new Date(
+                nowDate.getFullYear(), 
+                pastDate.getMonth(), 
+                pastDate.getDate(),
+                pastDate.getHours(),
+                pastDate.getMinutes()
+            );
+            if (nowDate < currentAnniversary) {
+                years--;
+            }
+
+            const lastAnniversary = new Date(
+                pastDate.getFullYear() + years, 
+                pastDate.getMonth(), 
+                pastDate.getDate(),
+                pastDate.getHours(),
+                pastDate.getMinutes()
+            );
+
+            let msDifference = nowDate - lastAnniversary;
+
+            const msPerDay = 1000 * 60 * 60 * 24;
+            const msPerHour = 1000 * 60 * 60;
+            const msPerMinute = 1000 * 60;
+
+            const days = Math.floor(msDifference / msPerDay);
+            msDifference %= msPerDay; 
+
+            const hours = Math.floor(msDifference / msPerHour);
+            msDifference %= msPerHour; 
+
+            const minutes = Math.floor(msDifference / msPerMinute);
+
+            timeBox.innerHTML = `${years} years, ${days} days, ${hours} hours, and ${minutes} minutes`;
+        }
+
+        function initAgeTracker() {
+            updateDateTime();
+            calculateExactTimeElapsed();
+            setInterval(calculateExactTimeElapsed, 60000);
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initAgeTracker);
+        } else {
+            initAgeTracker();
+        }
+    </script>
+
+</body>
 </html>

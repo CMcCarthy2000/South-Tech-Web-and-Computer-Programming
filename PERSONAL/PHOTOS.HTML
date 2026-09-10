@@ -1,123 +1,127 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <title>Photos</title>
-        <link rel="stylesheet" href="style.css" />
-        <meta charset="UTF-8" />
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <link rel="icon" type="image/x-icon" href="favicon.ico" />
-        <!-- Placeholder favicon -->
-    </head>
-    <header>
-        <br>
-        <center>
-            <h1 class="shadow">
-                The current time is <span id="datetime"></span>
-                <noscript>Javascript is disabled, enable Javascript to enable extra features on this webpage</noscript>
-                <script>
-                    // Function to update the date and time
-                    function updateDateTime() {
-                        const now = new Date();
-                        const currentDateTime = now.toLocaleString();
-                        document.querySelector("#datetime").textContent = currentDateTime;
-                    }
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Photos</title>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+<body>
 
-                    // Call the updateDateTime function every second
-                    setInterval(updateDateTime, 1000);
+    <!-- 1. TOP BANNER: Real-time clock output -->
+    <div class="TOP">
+        <div class="top-content">
+            The current time is&nbsp; <span id="datetime"></span>
+        </div>
+    </div>
+
+    <!-- 2. MIDDLE AREA: Windows XP Filmstrip / Pictures Explorer Layout -->
+    <div class="MIDDLE">
+        <div class="explorer-container">
+            
+            <!-- Left Panel: Picture Tasks Sidebar (Page 5 & 42 Specs) -->
+            <div class="left-pane">
+                <div class="task-box">
+                    <div class="task-header">Picture Tasks</div>
+                    <div class="task-body">
+                        <a href="#">View as a slide show</a>
+                        <a href="#">Print pictures</a>
+                        <a href="#">Set as background</a>
+                    </div>
+                </div>
+                
+                <div class="task-box secondary-box">
+                    <div class="task-header">Other Places</div>
+                    <div class="task-body">
+                        <a href="INDEX.HTML">My Computer</a>
+                        <a href="PROJECTS.HTML">My Projects</a>
+                        <a href="ABOUT.HTML">My Documents</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Main Image Gallery Area -->
+            <div class="right-pane picture-view-pane">
+                <h1 class="folder-title">My Pictures</h1>
+                
+                <div class="gallery-grid">
                     
-                    function calculateExactTimeElapsed() {
-                        // FIX: Updated target ID to match the HTML span below
-                        const timeBox = document.getElementById("time-elapsed");
-                        if (!timeBox) return;
+                    <!-- PHOTO CONTAINER PLACEHOLDER 1 -->
+                    <div class="photo-thumbnail-card">
+                        <div class="thumbnail-box">
+                            <!-- Replace with your actual picture path later -->
+                            <img src="IMG/SHELL32.DLL/ICON317_1.ico" class="gallery-img" alt="Thumbnail 1" />
+                        </div>
+                        <div class="photo-label">image_01.jpg</div>
+                    </div>
 
-                        // Set the precise start date and time (June 18, 2009, at 6:30 PM)
-                        const pastDate = new Date("2009-06-18T18:30:00");
-                        const nowDate = new Date();
+                    <!-- PHOTO CONTAINER PLACEHOLDER 2 -->
+                    <div class="photo-thumbnail-card">
+                        <div class="thumbnail-box">
+                            <img src="IMG/SHELL32.DLL/ICON317_1.ico" class="gallery-img" alt="Thumbnail 2" />
+                        </div>
+                        <div class="photo-label">image_02.jpg</div>
+                    </div>
 
-                        // 1. Calculate the rough difference in years
-                        let years = nowDate.getFullYear() - pastDate.getFullYear();
+                    <!-- PHOTO CONTAINER PLACEHOLDER 3 -->
+                    <div class="photo-thumbnail-card">
+                        <div class="thumbnail-box">
+                            <img src="IMG/SHELL32.DLL/ICON317_1.ico" class="gallery-img" alt="Thumbnail 3" />
+                        </div>
+                        <div class="photo-label">image_03.jpg</div>
+                    </div>
 
-                        // 2. Adjust years if the current time hasn't reached 6:30 PM on June 18th yet this year
-                        const currentAnniversary = new Date(
-                            nowDate.getFullYear(), 
-                            pastDate.getMonth(), 
-                            pastDate.getDate(),
-                            pastDate.getHours(),
-                            pastDate.getMinutes()
-                        );
-                        if (nowDate < currentAnniversary) {
-                            years--;
-                        }
+                    <!-- PHOTO CONTAINER PLACEHOLDER 4 -->
+                    <div class="photo-thumbnail-card">
+                        <div class="thumbnail-box">
+                            <img src="IMG/SHELL32.DLL/ICON317_1.ico" class="gallery-img" alt="Thumbnail 4" />
+                        </div>
+                        <div class="photo-label">image_04.jpg</div>
+                    </div>
 
-                        // 3. Find the most recent exact anniversary date and time
-                        const lastAnniversary = new Date(
-                            pastDate.getFullYear() + years, 
-                            pastDate.getMonth(), 
-                            pastDate.getDate(),
-                            pastDate.getHours(),
-                            pastDate.getMinutes()
-                        );
+                </div>
+            </div>
+            
+        </div>
+    </div>
 
-                        // 4. Calculate the total remaining milliseconds since the last anniversary
-                        let msDifference = nowDate - lastAnniversary;
+    <!-- 3. BOTTOM BANNER: System shortcuts row -->
+    <div class="BOTTOM">
+        <div class="bottom-content">
+            <nav class="xp-nav">
+                <a href="INDEX.HTML" class="nav-item active">
+                    <img src="IMG/SHELL32.DLL/ICON16_1.ico" class="icon" alt="Home" />
+                    <span>Home</span>
+                </a>
+                <a href="PROJECTS.HTML" class="nav-item active">
+                    <img src="IMG/SHELL32.DLL/ICON9_1.ico" class="icon" alt="Projects" />
+                    <span>Projects</span>
+                </a>
+                <a href="PHOTOS.HTML" class="nav-item active">
+                    <img src="IMG/SHELL32.DLL/ICON317_1.ico" class="icon" alt="Photos" />
+                    <span>Photos</span>
+                </a>
+                <a href="ABOUT.HTML" class="nav-item active">
+                    <img src="IMG/SHELL32.DLL/ICON24_1.ico" class="icon" alt="About" />
+                    <span>About</span>
+                </a>
+            </nav>
+        </div>
+    </div>
 
-                        // 5. Break down the remaining milliseconds into precise days, hours, and minutes
-                        const msPerDay = 1000 * 60 * 60 * 24;
-                        const msPerHour = 1000 * 60 * 60;
-                        const msPerMinute = 1000 * 60;
+    <!-- CLOCK CONTROLLER -->
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const currentDateTime = now.toLocaleString();
+            const dtBox = document.querySelector("#datetime");
+            if (dtBox) dtBox.textContent = currentDateTime;
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
 
-                        const days = Math.floor(msDifference / msPerDay);
-                        msDifference %= msPerDay; 
-
-                        const hours = Math.floor(msDifference / msPerHour);
-                        msDifference %= msPerHour; 
-
-                        const minutes = Math.floor(msDifference / msPerMinute);
-
-                        // 6. Output the precise result layout
-                        timeBox.innerHTML = `${years} years, ${days} days, ${hours} hours, and ${minutes} minutes`;
-                    }
-
-                    // Run the calculation immediately, then update it live every minute
-                    function initAgeTracker() {
-                        calculateExactTimeElapsed();
-                        setInterval(calculateExactTimeElapsed, 60000);
-                    }
-
-                    // Safely initializes the script after your existing HTML finishes loading
-                    if (document.readyState === "loading") {
-                        document.addEventListener("DOMContentLoaded", initAgeTracker);
-                    } else {
-                        initAgeTracker();
-                    }
-                </script>
-            </h1>
-        </center>
-    </header>
-
-    <body>
-        <audio autoplay loop>
-            <source src="AUDIO/Title.mp3" type="audio/mp3">
-            Your browser does not support the audio element.
-        </audio>
-        <br>
-        <h1 class="WELCOME-TEXT">welcome</h1>
-        
-        <p>
-            This page is the photos page and I will fill it out later.
-        </p>
-
-        <main>
-            <footer style="bottom: 0; left: 0; position: absolute;">
-                <nav>
-                    <a href="INDEX.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON16_1.ico" class="icon"></a>
-                    <a href="PROJECTS.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON9_1.ico" class="icon"></a>
-                    <a href="PHOTOS.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON317_1.ico" class="icon"></a>
-                    <a href="ABOUT.HTML" class="active"><img src="IMG/SHELL32.DLL/ICON24_1.ico" class="icon"></a>
-                </nav>
-                <br>
-            </footer>
-        </main>
-    </body>
+</body>
 </html>

@@ -1,0 +1,30 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.TOP {
+    /* Main dark blue filling 92% of the bar, transitioning into a 1-pixel light-blue highlight at the very bottom edge */
+    background: linear-gradient(to bottom, #003399 calc(100% - 1px), #a6bde7 100%);
+    height: 7.8vh;
+    width: 100%;
+}
+
+.MIDDLE {
+    background-color: #5a7edc;
+    height: 84.4vh;
+    width: 100%;
+    background-image: radial-gradient(circle at 7% 15%, rgba(255, 255, 255, 0.5) 0%, transparent 20%);
+}
+
+.BOTTOM {
+    /* 1-pixel orange stripe at the very top edge, transitioning directly into the dark blue background */
+    background: linear-gradient(to bottom, #d25a12 1px, #003399 1px);
+    height: 7.8vh;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}

@@ -3,10 +3,24 @@ body {
     font-family: comic sans ms, sans-serif;
 }
 
+a {
+    display: inline-block; 
+    text-decoration: none;
+}
+
 a:hover {
-       text-shadow: 2px 2px;
-          text-shadow: 2px 2px red;
-             text-shadow: 2px 2px 5px red;
-                text-shadow: 2px 2px 4px #000000;
-                   text-shadow: 0 0 3px #ff0000;
+    color: beige;
+    text-shadow: 0 0 3px #ff0000; 
+    animation: shake-animation 0.15s infinite linear;
+}
+
+@keyframes shake-animation {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-1.5deg); }
+  75% { transform: rotate(1.5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.toptext {
+   color: white;
 }

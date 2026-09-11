@@ -7,6 +7,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script src="SCRIPTS/main.js"></script>
 </head>
 <body>
 
@@ -102,7 +103,10 @@
     </div>
 
     <!-- CLOCK CONTROLLER -->
+<!-- 
+    NOLONGER USED BECAUSE WE MOVED THE CLOCK SCRIPTS TO AN EXTERNAL FILE
     <script>
+        // Possibly move this to an external file
         function updateDateTime() {
             const now = new Date();
             const currentDateTime = now.toLocaleString();
@@ -112,6 +116,6 @@
         setInterval(updateDateTime, 1000);
         updateDateTime();
     </script>
-
+-->
 </body>
 </html>

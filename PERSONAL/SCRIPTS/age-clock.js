@@ -1,4 +1,11 @@
-        function updateDateTime() {
+//========= Copyright Conor McCarthy 2026-2028, All rights reserved. ============//
+//
+// Purpose: Calculates my current age
+//
+//
+//=============================================================================//
+
+function updateDateTime() {
             const now = new Date();
             const currentDateTime = now.toLocaleString();
             const dtBox = document.querySelector("#datetime");

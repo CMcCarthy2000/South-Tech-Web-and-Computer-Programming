@@ -15,8 +15,7 @@ a:hover {
 }
 
 body {
-    background-color: #ebe5e1;
-    background-image: url(IMG/pattern.JPEG);
+    background-color: rgb(70, 70, 27);
     background-blend-mode: multiply; 
 }
 

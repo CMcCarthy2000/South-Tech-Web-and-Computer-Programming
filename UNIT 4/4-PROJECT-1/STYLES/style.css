@@ -1,0 +1,45 @@
+body {
+    background-image: url(../IMG/bg.jpg);
+    color: #000000;
+    font-family: "Times New Roman", Times, serif;
+    margin: 15px 0;
+}
+
+/* Header Navigation Bar */
+.background {
+    background-color: #AAAAAA;
+    border: 2px outset #CCCCCC;
+    padding: 6px;
+    width: 738px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.background a {
+    color: #000080;
+    text-decoration: none;
+    padding: 0 2px;
+}
+
+.background a:hover {
+    color: #FF0000;
+    text-decoration: underline;
+}
+
+/* Hyperlink Standard Styling */
+a:link {
+    color: #0000FF;
+}
+
+a:visited {
+    color: #800080;
+}
+
+/* Center Content Table Styling */
+.content-box {
+    border-color: #999999;
+    margin-top: 12px;
+    margin-bottom: 10px;
+}

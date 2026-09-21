@@ -27,3 +27,8 @@ body {
 .footer_text {
     color: #FFF;
 }
+
+.disclamer {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}

@@ -1,0 +1,29 @@
+body {
+    background-image: url(../IMG/COFFEE.png);
+    color: #FFF;
+    margin: 0;
+}
+
+.h1,h2,p {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+.nav_background {
+    background-color: #dfbfa2;
+    padding-bottom: 5px;
+}
+
+.subtext {
+    color:#FFF;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.logo_text {
+    color:black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.footer_text {
+    color: #FFF;
+}

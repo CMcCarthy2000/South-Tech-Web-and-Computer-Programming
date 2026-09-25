@@ -1,0 +1,48 @@
+body {
+    background-image: url(../IMG/OUTSIDE.jpg);
+    background-size: fill;
+    color: #FFF;
+    margin: 0;
+}
+
+.h1,h2,p {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+.nav_background {
+    /* background-color: #dfbfa2; */
+    background-color: #D3D3D3;
+    width: 744;
+    border: 1;
+    border-style: ridge;
+    padding-bottom: 5px;
+    display: block;
+    width: 40%;            /* Set exact width matching the lower card */
+    margin-left: auto;     /* Centers block element horizontally */
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+.subtext {
+    color:#FFF;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.logo_text {
+    color:black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.footer_text {
+    color: #FFF;
+}
+
+.disclamer {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+#centered {
+    text-align: center;
+}

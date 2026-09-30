@@ -1,0 +1,52 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.BACKGROUND {
+    background-color: rgb(189, 189, 189);
+    border: 3px solid rgb(128, 0, 0);
+}
+
+.header_border {
+    border-bottom:3px solid rgb(128, 0, 0);
+}
+.footer_border {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
+    border-top:3px solid rgb(128, 0, 0);
+}
+
+.title {
+    color: rgb(128, 0, 0);
+}
+
+.person_link {
+    color: rgb(128, 0, 0);
+    text-decoration: none;
+    line-height: 0;
+}
+
+.line_reset {
+    line-height: 1;
+    visibility: hidden;
+}
+
+.logo {
+    padding: 2%;
+    height: 70px;
+    float:left;
+}
+
+a {
+    font-weight: bolder;
+}
+
+a:hover {
+    color: rgb(241, 80, 80);
+}

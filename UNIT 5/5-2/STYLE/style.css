@@ -1,0 +1,14 @@
+h1,h2,h3 {
+    color: #d22cfc;
+}
+
+html {
+    font-family: arial, sans-serif;
+    background-color: #acacac;
+    font-weight: 50;
+}
+
+.center {
+    text-align: center;
+    float: right;
+}

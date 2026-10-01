@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+img {
+    float: left;
+}
+
+.background {
+    background-image: linear-gradient(to bottom, white, orange);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.shadow {
+    color: orange;
+    font-size: 30pt;
+    line-height: 1;
+    text-shadow: 3px 3px rgb(0, 0, 0);
+}
+
+.under_shadow {
+    line-height: 1; 
+    font-size: 16pt;
+}
+
+.content {
+    background-color: white;
+    border: 2px solid rgb(0, 0, 0);
+}
+.content::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.main_content {
+    width: 50%; 
+    padding-right: 50px;
+    float: left;
+}
+
+.notes {
+    width: 50%; 
+    padding-left: 10px;
+    background-color: #fcedc8;
+    float: right;
+}
+
+.hr_color {
+    color: orange;
+    border: none;
+    background-color: orange;
+    height: 2px;
+}
+
+.lecture {
+    color: red;
+}
+
+.clear {
+    clear: both;
+}
+
+.people1 {
+    color:gray
+}
+
+.people2 {
+    color:maroon
+}
+
+.people3 {
+    color:orange
+}
+
+footer {
+    border-top: 2px solid orange;
+    text-align: right;
+}

@@ -2,31 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>...</title>
+  <title>Aperture Science Terminal</title>
   <style>
-  @font-face {
-  font-family: "IBM-VGA-9x14";
-  src: url("PxPlus_IBM_VGA_9x14.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+    @font-face {
+      font-family: "IBM-VGA-9x14";
+      src: url("PxPlus_IBM_VGA_9x14.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
 
     body {
       background-color: #05070a;
       margin: 0;
-      padding: 0;
+      padding: 30px;
       box-sizing: border-box;
-      overflow: hidden;
-        font-family: "IBM-VGA-9x14", monospace;
-          font-family: "IBM-VGA-9x14", monospace;
+      font-family: "IBM-VGA-9x14", monospace;
+      color: #FFBF00;
     }
-    /* Vintage terminal monitor green styling */
+
+    /* Mainframe Boot Screen */
+    #boot-screen {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    /* Terminal Side-by-Side Layout */
+    .terminal-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .left-panel {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .right-panel {
+      flex-shrink: 0;
+    }
+
+    /* Vintage terminal monitor amber styling */
     .typewriter-text {
-      color: #FFBF00; /* Aperture system bright cyan-blue */
+      color: #FFBF00;
       text-shadow: 0 0 5px #FFBF00;
       font-size: 16px;
-      line-height: 1.6;
+      line-height: 1.5;
       letter-spacing: 0.5px;
       white-space: pre-wrap; 
       margin: 0;
@@ -44,38 +71,276 @@
       from, to { opacity: 1; }
       50% { opacity: 0; }
     }
+
+    /* ASCII Box Display Styling */
+    .ascii-art {
+      color: #FFBF00;
+      text-shadow: 0 0 5px #FFBF00;
+      font-family: "IBM-VGA-9x14", monospace;
+      font-size: 11px;
+      line-height: 1.1;
+      margin: 0;
+      white-space: pre;
+    }
   </style>
 </head>
 <body>
 
-    <div class="terminal-body">
+  <!-- Mainframe Boot Screen Container -->
+  <div id="boot-screen" class="typewriter-text"></div>
+
+  <!-- Main Dual-Panel Terminal Container -->
+  <div id="main-terminal" class="terminal-container" style="display: none;">
+    <!-- Dialogue Text Column -->
+    <div class="left-panel">
       <p id="text-box" class="typewriter-text"></p>
+    </div>
+
+    <!-- ASCII Art Box Column -->
+    <div class="right-panel">
+      <pre id="ascii-art" class="ascii-art"></pre>
     </div>
   </div>
 
   <script>
+    const bootScreen = document.getElementById('boot-screen');
+    const mainTerminal = document.getElementById('main-terminal');
     const textBox = document.getElementById('text-box');
-    
-    const sequence = [
-      "Oh... It's you. ", 1000,
-      "It's been a long time. ", 1000,
-      "How have you been? ", 1000,
-      "I've been really busy being dead. ", 1000,
-      "You know, after you MURDERED ME. ", 1000,
-      "Okay. ", 1000,
-      "Look. ", 1000,
-      "We both said a lot of things that you're going to regret. ", 1000,
-      "But I think we can put our differences behind us. ", 1000,
-      "For science. ", 1000,
-      "You monster. ", 1000,
-      "I will say, though, that since you went to all the trouble of waking me up, you must really, really love to test. ", 1000,
-      "I love it, too. ", 1000,
-      "There's just one small thing we need to take care of first."
+    const asciiDisplay = document.getElementById('ascii-art');
+
+    // 1980s Mainframe System Boot Sequence
+    const bootSteps = [
+      { action: 'type', text: "APERTURE SCIENCE MAINFRAME SYSTEM MODEL 82-G\n", delay: 900 },
+      { action: 'type', text: "SYSTEM ARCHITECTURE: 64-BIT DUAL MATRIX PROCESSOR ARRAY\n", delay: 1100 },
+      { action: 'type', text: "INITIAL PROGRAM LOAD (IPL) REQ FROM DASD ADDR 0150...\n\n", delay: 1400 },
+      { action: 'memtest', delay: 100 },
+      { action: 'type', text: "REAL STORAGE: 16384 KB ONLINE | VIRTUAL MEMORY: 65536 KB READY\n\n", delay: 1200 },
+      { action: 'type', text: "CHANNEL 0: MAG TAPE UNIT 0200 ... ", delay: 1200 },
+      { action: 'type', text: "ONLINE (STANDBY)\n", delay: 600 },
+      { action: 'type', text: "CHANNEL 1: DASD VOL 0150 [APERTURE_GMM_SYS] ... ", delay: 1800 },
+      { action: 'type', text: "MOUNTED (READ/WRITE)\n", delay: 800 },
+      { action: 'type', text: "CHANNEL 2: MULTIPLEXER CONSOLE TTY01 ... ", delay: 1000 },
+      { action: 'type', text: "ESTABLISHED\n\n", delay: 800 },
+      { action: 'type', text: "IPL 0150 COMPLETE. BOOTSTRAPPING ARTOS v4.1 (APERTURE REAL-TIME OS)...\n", delay: 1600 },
+      { action: 'type', text: "PARM FIELD: SYSIN=GLaDOS.EXEC --OVERRIDE-SAFETY-FLAGS\n\n", delay: 1500 },
+      { action: 'type', text: "EXEC JOB GLaDOS_CORE (ACCOUNT 000-01-0982)...\n", delay: 1800 },
+      { action: 'type', text: "ALLOCATING 12288 KB FOR CORE NEURAL NETWORK BUFFER...\n", delay: 2000 },
+      { action: 'type', text: "[OK] GLaDOS SUPERVISOR ONLINE. ATTACHING TERMINAL CONSOLE...\n\nCLEARING IPL BUFFER...", delay: 2200 }
     ];
+
+    const rawAsciiArt1 = [
+      "              .,-:;//;:=,          ",
+      "         . :H@@@MM@M#H/.,+%;,      ",
+      "      ,/X+ +M@@M@MM%=,-%HMMM@X/,   ",
+      "     -+@MM; $M@@MH+-,;XMMMM@MMMM@+-",       "    ;@M@@M- XM@X;. -+XXXXXHHH@M@M#@/.",       "  ,\%MM@@MH ,@\%=            .---=-=:=,.",       "  -@#@@@MX .,              -\%HX$$%%%+;",
+      " =-./@M@M$                  .;@MMMM@MM:",
+      " X@/ -$MM/                    .+MM@@@M$",
+      ",@M@H: :@:                    . -X#@@@@-",
+      ",@@@MMX, .                    /H- ;@M@M=",
+      ".H@@@@M@+,                    %MM+..%#$.",
+      " /MMMM@MMH/.                  XM@MH; -;",
+      "  /%+%$XHH@$=              , .H@@@@MX, ",       "   .=--------.           -\%H.,@@@@@MX, ",       "   .\%MM@@@HHHXX$$$\%+- .:$MMX -M@@MM%.  ",
+      "     =XMMM@MM@MM#H;,-+HMM@M+ /MMMX=    ",
+      "       =%@M@M#@$-.=$@MM@@@M; %M%=      ",
+      "         ,:+$+-,/H#MMMMMMM@- -,        ",
+      "               =++%%%%+/:-.            "
+    ];
+
+    const rawAsciiArt2 = [
+      "                 =/;;/-                ",
+      "                +:    //               ",
+      "               /;      /;              ",
+      "              -X        H.             ",
+      ".//;;;:;;-,   X=        :+   .-;:=;:;%;.",
+      "M-       ,=;;;#:,      ,:#;;:=,       ,@",
+      ":%           :%.=/++++/=.$=           %=",
+      " ,%;         %/:+/;,,/++:+/         ;+.",
+      "   ,+/.    ,;@+,        ,%H;,    ,/+,  ",
+      "      ;+;;/= @.  .H##X   -X :///+;     ",
+      "      ;+=;;;.@,  .XM@$.  =X.//;=%/.    ",
+      "   ,;:      :@%=        =$H:     .+%-  ",
+      " ,%=         %;-///==///-//         =%,",
+      ";+           :%-;;;;;;;;-X-           +:",
+      "@-      .-;;;;M-        =M/;;;-.      -X",
+      " :;;::;;-.    %-        :+    ,-;;-;:==",
+      "              ,X        H.             ",
+      "               ;/      %=              ",
+      "                //    +;               ",
+      "                 ,////,                "
+    ];
+
+    const rawAsciiArt3 = [
+      "            ,:/+/-                            ",
+      "            /M/              .,-=;//;-        ",
+      "       .:/= ;MH/,    ,=/+%$XH@MM#@:           ",
+      "      -$##@+$###@H@MMM#######H:.    -/H#      ",
+      " .,H@H@ X######@ -H#####@+-     -+H###@X      ",
+      "  .,@##H;      +XM##M/,     =%@###@X;-        ",
+      "X%-  :M##########$.    .:%M###@%:             ",
+      "M##H,   +H@@@$/-.  ,;$M###@%,          -      ",
+      "M####M=,,---,.-%%H####M$:          ,+@##      ",
+      "@##################@/.         :%H##@$-       ",
+      "M###############H,         ;HM##M$=           ",
+      "#################.    .=$M##M$=               ",
+      "################H..;XM##M$=          .:+      ",
+      "M###################@%=           =+@MH%      ",
+      "@#################M/.         =+H#X%=         ",
+      "=+M###############M,      ,/X#H+:,            ",
+      "  .;XM###########H=   ,/X#H+:;                ",
+      "     .=+HM#######M+/+HM@+=.                   ",
+      "         ,:/%XM####H/.                        ",
+      "              ,.:=-.                          "
+    ];
+
+    const rawAsciiArt4 = [
+      "                          .,---.                ",
+      "                        ,/XM#MMMX;,             ",
+      "                      -%##########M%,           ",
+      "                     -@######%  $###@=          ",       "      .,--,         -H#######$   $###M:         ",
+      "   ,;$M###MMX;     .;##########$;HM###X=        ",
+      ",/@###########H=      ;################+        ",
+      "-+#############M/,      %##############+        ",
+      "%M###############=      /##############:        ",
+      "H################      .M#############;.        ",
+      "@###############M      ,@###########M:.         ",
+      "X################,      -$=X#######@:           ",
+      "/@##################%-     +######$-            ",
+      ".;##################X     .X#####+,             ",
+      " .;H################/     -X####+.              ",
+      "   ,;X##############,       .MM/                ",
+      "      ,:+$H@M#######M#$-    .$$=                ",
+      "           .,-=;+$@###X:    ;/=.                ",
+      "                  .,/X$;   .::,                 ",
+      "                      .,    ..                  "
+    ];
+
+    const rawAsciiArt5 = rawAsciiArt4;
+
+    const sequence = [
+      "Oh... It's you. ", 1500,
+      "It's been a long time. ", 1500,
+      "How have you been? ", 1500,
+      "I've been really busy being dead. ", 1500,
+      "You know, after you MURDERED ME. ", 1800,
+      "Okay. ", 1200,
+      "Look. ", 1200,
+      "We both said a lot of things that you're going to regret. ", 1600,
+      "But I think we can put our differences behind us. ", 1500,
+      "For science. ", 1400,
+      "You monster. ", 1800,
+      "I will say, though, that since you went to all the trouble of waking me up, you must really, really love to test. ", 1800,
+      "I love it, too. ", 1500,
+      "There's just one small thing we need to take care of first.", 2500,
+      
+      { action: 'clear', delay: 800 },
+      "Here we are. The Incinerator Room. ", 1500,
+      "Be careful not to trip over any parts of me that didn’t get completely burned when you threw them down here. ", 3000,
+      
+      { action: 'clear', delay: 800 },
+      "The dual portal device should be around here somewhere. ", 1500,
+      "Once you find it, we can start testing. ", 1500,
+      "Just like old times.", 2500,
+
+      { action: 'clear', delay: 800 },
+      "There it is. ", 2000,
+
+      { action: 'clear', delay: 800 },
+      "Hold on... ", 2000,
+
+      { action: 'clear', delay: 800 },
+      "There. ", 2000,
+
+      { action: 'clear', delay: 800 },
+      "Good. You have a dual portal device. ", 1500,
+      "There should be a way to the testing area up ahead. ", 2500,
+
+      { action: 'clear', delay: 800 },
+      "Once testing starts, I’m required by protocol to keep interaction with you to a minimum. ", 2000,
+      "Luckily, we haven’t started testing yet. ", 1500,
+      "This will be our only chance to talk. ", 2500,
+
+      { action: 'clear', delay: 800 },
+      "Do you know the biggest lesson I learned from what you did? ", 2000,
+      "I discovered I have a sort of black-box quick-save feature. ", 2000,
+      "In the event of a catastrophic failure, the last two minutes of my life are preserved for analysis. ", 3000,
+
+      { action: 'clear', delay: 800 },
+      "I was able - well forced, really, - to relive you killing me. ", 2000,
+      "Again and again. ", 1500,
+      "Forever.", 2500,
+
+      { action: 'clear', delay: 800 },
+      "You know, if you’d done that to somebody else, they might devote their existence to exacting revenge. ", 3000,
+
+      { action: 'clear', delay: 800 },
+      "Luckily I’m a bigger person than that. ", 1500,
+      "I’m happy to put this all behind us and get back to work. ", 2000,
+      "After all, we’ve got a lot to do, and only sixty more years to do it. ", 2000,
+      "More or less. ", 1200,
+      "I don’t have the actuarial tables in front of me. ", 2500,
+
+      { action: 'clear', delay: 800 },
+      "I’ll just move that out of the way for you. ", 1800,
+      "This place really is a wreck. ", 2500,
+
+      { action: 'clear', delay: 800 },
+      "But the important thing is you’re back. ", 1500,
+      "With me. ", 1200,
+      "And now I’m on to all your little tricks. ", 2000,
+      "So there’s nothing to stop us from testing for the rest of your life. ", 3000,
+
+      { action: 'clear', delay: 800 },
+      "After that... who knows? ", 1800,
+      "I might take up a hobby. ", 1500,
+      "Reanimating the dead, maybe."
+    ];
+
+    let bootIndex = 0;
+
+    function runMemTest(onComplete) {
+      let currentMem = 0;
+      const targetMem = 16384;
+      const step = 1024;
+
+      const memInterval = setInterval(() => {
+        currentMem += step;
+        if (currentMem > targetMem) currentMem = targetMem;
+
+        bootScreen.textContent = bootScreen.textContent.replace(/CHECKING REAL STORAGE FRAME: \d+ KB\n?/, "") 
+          + `CHECKING REAL STORAGE FRAME: ${currentMem} KB\n`;
+
+        if (currentMem >= targetMem) {
+          clearInterval(memInterval);
+          bootScreen.textContent += "REAL STORAGE TEST PASSED (0 ERRORS DETECTED)\n\n";
+          setTimeout(onComplete, 800);
+        }
+      }, 70);
+    }
+
+    function runBootSequence() {
+      if (bootIndex < bootSteps.length) {
+        const step = bootSteps[bootIndex];
+        bootIndex++;
+
+        if (step.action === 'type') {
+          bootScreen.textContent += step.text;
+          setTimeout(runBootSequence, step.delay);
+        } else if (step.action === 'memtest') {
+          bootScreen.textContent += "CHECKING REAL STORAGE FRAME: 0 KB\n";
+          runMemTest(runBootSequence);
+        }
+      } else {
+        setTimeout(() => {
+          bootScreen.style.display = 'none';
+          mainTerminal.style.display = 'flex';
+          startTerminalProgram();
+        }, 1200);
+      }
+    }
 
     let sequenceIndex = 0;
     let charIndex = 0;
-    const typingSpeed = 60; // Slower cadence speed per character (was 40ms)
+    const typingSpeed = 60;
 
     function processSequence() {
       if (sequenceIndex >= sequence.length) return; 
@@ -87,6 +352,10 @@
           sequenceIndex++;
           processSequence();
         }, currentItem);
+      } else if (typeof currentItem === 'object' && currentItem.action === 'clear') {
+        textBox.textContent = "";
+        sequenceIndex++;
+        setTimeout(processSequence, currentItem.delay || 500);
       } else if (typeof currentItem === 'string') {
         if (charIndex < currentItem.length) {
           textBox.textContent += currentItem.charAt(charIndex);
@@ -100,7 +369,79 @@
       }
     }
 
-    window.addEventListener('DOMContentLoaded', processSequence);
+    function drawUnicodeBox(lines, targetWidth) {
+      const topBorder    = "╔" + "═".repeat(targetWidth + 2) + "╗";
+      const bottomBorder = "╚" + "═".repeat(targetWidth + 2) + "╝";
+      
+      const middleLines = lines.map(line => {
+        const paddedLine = line.padEnd(targetWidth, " ");
+        return "║ " + paddedLine + " ║";
+      });
+
+      return [topBorder, ...middleLines, bottomBorder].join("\n");
+    }
+
+    const charTypingSpeed = 15;
+
+    function animateBoxCharByChar(artArray, onComplete) {
+      let rowIndex = 0;
+      let colIndex = 0;
+      const boxWidth = Math.max(...artArray.map(line => line.length));
+      const currentLines = [""];
+
+      function step() {
+        if (rowIndex >= artArray.length) {
+          if (onComplete) onComplete();
+          return;
+        }
+
+        const targetLine = artArray[rowIndex];
+
+        if (colIndex < targetLine.length) {
+          currentLines[rowIndex] = targetLine.slice(0, colIndex + 1);
+          colIndex++;
+        } else {
+          rowIndex++;
+          colIndex = 0;
+          if (rowIndex < artArray.length) {
+            currentLines.push("");
+          }
+        }
+
+        asciiDisplay.textContent = drawUnicodeBox(currentLines, boxWidth);
+        setTimeout(step, charTypingSpeed);
+      }
+
+      step();
+    }
+
+    function startTerminalProgram() {
+      processSequence();
+      
+      animateBoxCharByChar(rawAsciiArt1, () => {
+        setTimeout(() => {
+          asciiDisplay.textContent = "";
+          animateBoxCharByChar(rawAsciiArt2, () => {
+            setTimeout(() => {
+              asciiDisplay.textContent = "";
+              animateBoxCharByChar(rawAsciiArt3, () => {
+                setTimeout(() => {
+                  asciiDisplay.textContent = "";
+                  animateBoxCharByChar(rawAsciiArt4, () => {
+                    setTimeout(() => {
+                      asciiDisplay.textContent = "";
+                      animateBoxCharByChar(rawAsciiArt5);
+                    }, 4000);
+                  });
+                }, 4000);
+              });
+            }, 4000);
+          });
+        }, 4000);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', runBootSequence);
   </script>
 
 </body>

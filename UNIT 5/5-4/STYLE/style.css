@@ -67,3 +67,8 @@ a:hover {
 footer font {
     color: #aaaaaa !important;
 }
+
+.line_reset {
+    line-height: 1;
+    visibility: hidden;
+}

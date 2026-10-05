@@ -84,3 +84,7 @@ footer {
     border-top: 2px solid orange;
     text-align: right;
 }
+
+a:hover {
+    color: rgb(241, 80, 80);
+}

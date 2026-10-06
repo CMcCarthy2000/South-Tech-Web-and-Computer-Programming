@@ -1,0 +1,98 @@
+body {
+    background-image: url(../IMG/tile.png);
+    font-family: Balgruf, Georgia, serif;
+    color: #000000;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, #070707, rgba(255, 87, 34, 0));
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+@font-face {
+  font-family: 'Fraktur';
+  src: url('../fonts/franktur.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Balgruf';
+  src: url('../fonts/Balgruf.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Deadra';
+  src: url('../fonts/Daedra.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.img {
+  background-color: #e0e0e0;
+  outline: 2px solid #ff5722;
+  outline-offset: -10px; /* Forces the outline to shrink inward */}
+.h1 {
+    line-height: 1; /* Reduces the default line box height */
+    margin-bottom: 0;
+    font-family: 'Fraktur', Georgia, serif;
+}
+
+.float {
+    float: right;
+    padding-right: 25%;
+    line-height: 1; /* Reduces the default line box height */
+    margin-bottom: 0;
+}
+
+a, a:link, a:visited {
+    color: #0000EE !important;
+    text-decoration: none !important;
+}
+
+/* Header Navigation Bar */
+.background {
+    background-color: #AAAAAA;
+    border: 2px outset #CCCCCC;
+    padding: 6px;
+    width: 738px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.background a {
+    color: #000080;
+    text-decoration: none;
+    padding: 0 2px;
+}
+
+.background a:hover {
+    color: #FF0000;
+    text-decoration: underline;
+}
+
+/* Hyperlink Standard Styling */
+a:link {
+    color: #0000FF;
+}
+
+a:visited {
+    color: #800080;
+}
+
+/* Center Content Table Styling */
+.content-box {
+    border-color: #999999;
+    margin-top: 12px;
+    margin-bottom: 10px;
+}

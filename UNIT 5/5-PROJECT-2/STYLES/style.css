@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 80%;
+}
+
+html {
+    background-color: gray;
+}
+.header {
+    text-align: center;
+}
+
+.links {
+    padding-left: 10px;
+}
+
+.left_nav {
+    float: left;
+    padding-bottom: 90%;
+    background-color: #666666;
+}

@@ -1,6 +1,10 @@
+body {
+    background-color: #C0C0C0 ;
+}
+
 .background {
     background-color: #AAAAAA;
-    border: 2px outset #CCCCCC;
+    border: 5px outset #CCCCCC;
     padding: 6px;
     width: 738px;
     font-family: Arial, Helvetica, sans-serif;

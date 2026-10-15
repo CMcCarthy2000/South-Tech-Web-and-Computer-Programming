@@ -1,0 +1,28 @@
+.open {
+    list-style-type: circle;
+}
+
+.letters {
+    list-style: upper-latin;
+}
+
+pre {
+  font-family: inherit;
+}
+
+.green {
+    color: green;
+}
+li::marker {
+  color: black;
+}
+
+.starts_at_letter_f {
+  list-style-type: upper-latin;
+  start: 6;
+}
+
+a {
+  text-decoration: none;
+  color: orange;
+}

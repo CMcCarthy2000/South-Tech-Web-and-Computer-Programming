@@ -3,33 +3,51 @@ const ctx = canvas.getContext('2d');
 
 canvas.style.backgroundColor = '#87ceeb';
 
+// --- IMAGE LOADING SETUP ---
+const playerImage = new Image();
+let isImageLoaded = false;
+
+playerImage.onload = () => {
+  console.log('Player image loaded successfully!');
+  isImageLoaded = true;
+};
+
+playerImage.onerror = () => {
+  console.error('Failed to load image. Ensure "blahaj.png" is in the same directory or check your path/CORS settings.');
+};
+
+// Set path to your image file
+playerImage.src = 'js/blahaj.png';
+
 let showDebug = false;
 
-// Player Rigid Body Properties
+// --- PLAYER RIGID BODY PROPERTIES ---
 const player = {
   x: 100,
-  y: 100,
-  width: 40,
-  height: 40,
+  y: 80,
+  width: 100,             // Scaled up width (formerly 40)
+  height: 80,            // Scaled up height (formerly 40)
   vx: 0,
   vy: 0,
   speed: 4,
   jumpForce: -12,
   gravity: 0.5,
   grounded: false,
-  color: '#4f46e5',
+  color: '#4f46e5',      // Fallback color if image is loading/missing
   
   // Rotational Physics State
-  rotation: 45,            // Angle in radians
-  angularVelocity: 0,     // Speed of spin (rad/frame)
-  angularDamping: 0.95,   // Rotational friction/air resistance
+  rotation: 0,           // Angle in radians
+  angularVelocity: 0,    // Speed of spin (rad/frame)
+  angularDamping: 0.95,  // Rotational friction
   isTeetering: false
 };
 
 const platforms = [
-  { x: 150, y: 380, width: 140, height: 20, color: '#64748b' },
-  { x: 350, y: 320, width: 160, height: 20, color: '#64748b' },
-  { x: 100, y: 240, width: 120, height: 20, color: '#64748b' }
+  { x: 100, y: 340, width: 120, height: 20, color: '#5BCEFA' },
+  { x: 200, y: 340, width: 120, height: 20, color: '#F5A9B8' },
+  { x: 300, y: 240, width: 120, height: 20, color: '#FFFFFF' },
+  { x: 400, y: 240, width: 120, height: 20, color: '#F5A9B8' },
+  { x: 500, y: 240, width: 120, height: 20, color: '#5BCEFA' }
 ];
 
 const keys = { KeyA: false, KeyD: false, KeyW: false, Space: false };
@@ -46,7 +64,6 @@ window.addEventListener('keyup', (e) => {
   if (e.code in keys) keys[e.code] = false;
 });
 
-// Helper for Direction string in Debug
 function getDirectionString(vx, vy) {
   if (Math.abs(vx) < 0.1 && Math.abs(vy) < 0.1) return 'IDLE';
 
@@ -75,7 +92,6 @@ function update() {
   // 3. Gravity
   player.vy += player.gravity;
 
-  // Apply velocities to positions smoothly (No instant positional teleporting)
   player.x += player.vx;
   player.y += player.vy;
 
@@ -94,47 +110,39 @@ function update() {
   player.isTeetering = false;
 
   platforms.forEach(plat => {
-    // Check bounding box intersection
     const overlapsX = player.x < plat.x + plat.width && player.x + player.width > plat.x;
     const overlapsY = player.y < plat.y + plat.height && player.y + player.height > plat.y;
 
     if (overlapsX && overlapsY) {
       const playerCenter = player.x + player.width / 2;
 
-      // Top surface collision
       if (player.vy > 0 && player.y + player.height - player.vy <= plat.y + 10) {
         player.y = plat.y - player.height;
         player.vy = 0;
 
-        // Check Center of Gravity overhang
         const overhangRight = playerCenter - (plat.x + plat.width);
         const overhangLeft = plat.x - playerCenter;
 
         if (overhangRight > 0) {
-          // Teetering off Right Edge: Apply rotational torque and outward impulse
           player.isTeetering = true;
           const torque = overhangRight * 0.002;
           player.angularVelocity += torque;
-          player.vx += overhangRight * 0.1; // Smooth push sideways
+          player.vx += overhangRight * 0.1;
         } else if (overhangLeft > 0) {
-          // Teetering off Left Edge
           player.isTeetering = true;
           const torque = overhangLeft * 0.002;
           player.angularVelocity -= torque;
-          player.vx -= overhangLeft * 0.1; // Smooth push sideways
+          player.vx -= overhangLeft * 0.1;
         } else {
-          // Fully supported
           player.grounded = true;
           player.angularVelocity = 0;
           player.rotation = 0;
         }
       } 
-      // Bottom surface collision
       else if (player.vy < 0 && player.y - player.vy >= plat.y + plat.height - 10) {
         player.y = plat.y + plat.height;
         player.vy = 0;
       }
-      // Side collisions
       else if (player.vx > 0) {
         player.x = plat.x - player.width;
         player.vx = 0;
@@ -160,11 +168,10 @@ function update() {
   // Rotational Physics Updates
   if (!player.grounded) {
     if (!player.isTeetering) {
-      // Mid-air flip based on horizontal speed
       player.angularVelocity = player.vx * 0.03;
     }
     player.rotation += player.angularVelocity;
-    player.angularVelocity *= player.angularDamping; // Air resistance dampening
+    player.angularVelocity *= player.angularDamping;
   }
 }
 
@@ -189,25 +196,36 @@ function draw() {
     ctx.fillRect(plat.x, plat.y, plat.width, plat.height);
   });
 
-  // Draw Player
+  // Draw Player Image / Fallback Rect
   ctx.save();
   const centerX = player.x + player.width / 2;
   const centerY = player.y + player.height / 2;
   ctx.translate(centerX, centerY);
   ctx.rotate(player.rotation);
 
-  ctx.fillStyle = player.color;
-  ctx.fillRect(-player.width / 2, -player.height / 2, player.width, player.height);
+  if (isImageLoaded) {
+    ctx.drawImage(
+      playerImage,
+      -player.width / 2,
+      -player.height / 2,
+      player.width,
+      player.height
+    );
+  } else {
+    // Draw solid color fallback box until image loads
+    ctx.fillStyle = player.color;
+    ctx.fillRect(-player.width / 2, -player.height / 2, player.width, player.height);
 
-  const borderWidth = 3;
-  ctx.strokeStyle = '#000000';
-  ctx.lineWidth = borderWidth;
-  ctx.strokeRect(
-    -player.width / 2 + borderWidth / 2,
-    -player.height / 2 + borderWidth / 2,
-    player.width - borderWidth,
-    player.height - borderWidth
-  );
+    const borderWidth = 3;
+    ctx.strokeStyle = '#000000';
+    ctx.lineWidth = borderWidth;
+    ctx.strokeRect(
+      -player.width / 2 + borderWidth / 2,
+      -player.height / 2 + borderWidth / 2,
+      player.width - borderWidth,
+      player.height - borderWidth
+    );
+  }
 
   ctx.restore();
 
@@ -215,7 +233,6 @@ function draw() {
   if (showDebug) {
     const totalSpeed = Math.hypot(player.vx, player.vy);
 
-    // Velocity Vector Line
     if (totalSpeed > 0.1) {
       const vectorLength = 35;
       const angle = Math.atan2(player.vy, player.vx);
@@ -235,7 +252,6 @@ function draw() {
       ctx.fill();
     }
 
-    // HUD Text Box
     ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
     ctx.fillRect(10, 10, 220, 145);
     ctx.strokeStyle = '#38bdf8';

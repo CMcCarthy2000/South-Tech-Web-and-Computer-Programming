@@ -1,6 +1,151 @@
 body {
     background-color: #C0C0C0 ;
 }
+/* Make container shrink to wrap tightly around the title text */
+.splash-container {
+    position: relative;
+    display: inline-block; /* Shrinks container width to fit title exactly */
+    margin: 0 auto;
+}
+
+/* Remove default header margins that distort positioning */
+.splash-container h1 {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+/* Minecraft Splash Text Positioning */
+.splash-text {
+    position: absolute;
+    bottom: -5px;          /* Vertical position relative to title text */
+    right: -15px;          /* Horizontal position relative to title end */
+    color: #FFFF55;        /* Minecraft Yellow */
+    font-size: 16px;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-shadow: 2px 2px 0px #3F3F00;
+    white-space: nowrap;
+    transform: rotate(-20deg);
+    transform-origin: left bottom; /* Anchor rotation point for accurate alignment */
+    animation: splash-pulse 0.5s infinite alternate ease-in-out;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Pulsating Animation (120 BPM) */
+@keyframes splash-pulse {
+    0% {
+        transform: rotate(-20deg) scale(1);
+    }
+    100% {
+        transform: rotate(-20deg) scale(1.15);
+    }
+}
+/* Minecraft Splash Text Styling */
+.splash-text {
+  position: absolute;
+  bottom: -15px;
+  right: -20px;
+  color: #FFFF55; /* Minecraft Yellow */
+  font-size: 22px;
+  font-weight: bold;
+  font-family: sans-serif;
+  text-shadow: 2px 2px 0px #3F3F00; /* Dark Yellow/Brown shadow */
+  white-space: nowrap;
+  transform: rotate(-20deg);
+  transform-origin: center center;
+  animation: splash-pulse 0.5s infinite alternate ease-in-out;
+  user-select: none;
+  pointer-events: none; /* Allows clicking through to container */
+}
+
+/* Pulsating Animation (120 BPM) */
+@keyframes splash-pulse {
+  0% {
+    transform: rotate(-20deg) scale(1);
+  }
+  100% {
+    transform: rotate(-20deg) scale(1.15);
+  }
+}
+marquee {
+    /* this marquee will treat the navbar as the side of the screen and will not scroll over it */
+    position: fixed;
+    top: 0;
+    left: 200px;
+}
+.LEFT_NAV { 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #333;
+    padding-top: 20px;
+}
+
+.LEFT_NAV img {
+    display: block;
+    margin: 0 auto 20px auto; /* Center the image and add some space below */
+    width: 70%; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    /*background of image in a square that is rotated at a 45-degree angle */
+    background-color: #fff;
+    transform: rotate(45deg);
+    
+}
+
+.LEFT_NAV ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.LEFT_NAV li {
+    margin-bottom: 10px;
+}
+
+.LEFT_NAV a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
+.LEFT_NAV a:hover {
+    background-color: #555;
+}
+
+.RIGHT_NAV { 
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #333;
+    padding-top: 20px;
+}
+
+.RIGHT_NAV ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.RIGHT_NAV li {
+    margin-bottom: 10px;
+}
+
+.RIGHT_NAV a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
+.RIGHT_NAV a:hover {
+    background-color: #555;
+}
+
 
 .background {
     background-color: #AAAAAA;
@@ -29,11 +174,15 @@ a {
     text-decoration: none;
 }
 
-.LEFT_BOX {
+.LEFT_BOX { 
+    /* this box gets pushed because of the navigation bar */
+    margin-left: 200px;
     float: left;
 }
 
 .RIGHT_BOX {
+    /* this box gets pushed because of the navigation bar */
+    margin-right: 200px;
     float: right;
 }
 footer {

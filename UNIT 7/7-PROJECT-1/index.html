@@ -8,31 +8,63 @@
     <link rel="stylesheet" href="STYLES/style.css">
 </head>
 <body>
+    <nav class="LEFT_NAV">
+        <ul>
+            <!--site logo-->
+            <img src="IMG/BK.png" alt="Logo" style="width: 70%; height: auto;">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="mercury.html">PAGE2</a></li>
+            <li><a href="venus.html">PAGE3</a></li>
+        </ul>
+    </nav>
     <header style="text-align: center;">
-        <h1>PIZZA PLACE NAME</h1>
-  <marquee>This text will scroll across the screen and show good reviews</marquee>
+        <!-- Minecraft Splash Container -->
+        <div id="burger-splash" class="splash-container">
+            <h1>Burger Palace</h1>
+            </div>
+            <br>
+            <br>
     </header>
-                <!-- Navigation Bar -->
-                 <center>
-                <nav class="background">
-                    | <a href="index.html"><img src="IMG/click_here.gif"></a>
-                    | <a href="mercury.html"><img src="IMG/click_here.gif"></a>
-                    | <a href="venus.html"><img src="IMG/click_here.gif"></a> |
-                </nav>
-                </center>
+    
+    <!-- Navigation Bar -->
+    <center>
+        <nav class="background">
+            | <a href="index.html"><img src="IMG/click_here.gif"></a>
+            | <a href="mercury.html"><img src="IMG/click_here.gif"></a>
+            | <a href="venus.html"><img src="IMG/click_here.gif"></a> |
+        </nav>
+    </center>
+
     <main>
         <span class="LEFT_BOX">
-            <h2>HEADER</h2>
-            <p>Paragraph</p>
+            <h2>Food</h2>
+            <p>Burger Toad</p>
+            <img src="IMG/pizza_toad.jpeg" alt="Food Image" style="width: 10%; height: auto;">
+            <br>
+            <p>Burger pizza</p>
+            <img src="IMG/pizzapizza.png" alt="Food Image" style="width: 10%; height: auto;">
         </span>
 
-        <span class="RIGHT_BOX">
-            <h2>HEADER</h2>
-            <p>Paragraph</p>
+        <span class="RIGHT_BOX"> <!--this box floats to the right and is aligned with the left box-->
+            <h2>Drinks</h2>
+            <p>Drink Toad</p>
+            <img src="IMG/mrcs.gif" alt="Drink Image" style="width: 10%; height: auto;">
+            <br>
+            <p>Drink soda</p>
+            <img src="IMG/chickenman.png" alt="Drink Image" style="width: 10%; height: auto;">
         </span>
     </main>
+
     <footer>
+        <small> +7 (499) 244-24-69</small>
         <p>&copy; 2026 My Project. All rights reserved.</p>
     </footer>
+
+    <!-- Link your external JavaScript file here -->
+    <script src="marquee-logic.js"></script>
+    <script>
+        // Initialize the splash text on the container
+        createSplashText('burger-splash');
+    </script>
 </body>
 </html>

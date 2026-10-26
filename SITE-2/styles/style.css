@@ -1,0 +1,63 @@
+body {
+    background-color: #F4E3B2;
+    font-family: hand;
+
+}
+
+
+.left_nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #D3D5D7;
+    padding-top: 20px;
+    padding-left: 15px;
+}
+
+.left_box { 
+    /* this box gets pushed because of the navigation bar */
+    margin-left: 200px;
+    float: left;
+}
+
+.middle {
+    background-color: black;
+}
+
+.right_box { 
+    /* this box gets pushed because of the navigation bar */
+    margin-right: 200px;
+    float: right;
+}
+
+/*. 
+seperator {
+    position: absolute;
+    margin-left: 50%;
+    margin-right: 25%;
+    width: 15%;
+    background-color: blue;
+}
+*/
+.hidden {
+    visibility: hidden;
+}
+
+.title {
+    text-align: center;
+}
+
+.sub_title {
+    text-align: center;
+    font-size: small;
+    line-height: 1;
+}
+@font-face {
+  font-family: 'hand';
+  src: url('../fonts/hand.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,99 @@
+body{
+    background-color: #254e15;
+    background-image: url("../IMG/vines.png");
+    background-blend-mode: multiply;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+h1{
+    text-align: center;
+    border-style: solid;
+    background-color: #8fbd7d;
+    border-color: #ffffff;
+}
+
+main{
+    border-style: solid;
+    background-color: #8fbd7d;
+    border-color: #000000;
+}
+
+small {
+    color: #757474;
+
+}
+
+.nobackground {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px auto;
+    width: 400px;
+    text-align: center;
+}
+
+.hover:hover {
+    background-color: #8fbd7d;
+    border-radius: 5px;
+    transition: background-color 0.5s ease;
+}
+
+/* Header Navigation Bar */
+.background {
+    background-color: #AAAAAA;
+    border: 2px outset #CCCCCC;
+    padding: 6px;
+    width: 738px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.logo {
+    background-color: #8fbd7d;
+    padding: 6px;
+}
+
+.background a {
+    color: #000080;
+    text-decoration: none;
+    padding: 0 2px;
+}
+
+.background a:hover {
+    color: #FF0000;
+    text-decoration: underline;
+}
+
+/* Hyperlink Standard Styling */
+a:link {
+    color: #0000FF;
+}
+
+a:visited {
+    color: #800080;
+}
+
+/* Center Content Table Styling */
+.content-box {
+    border-color: #999999;
+    margin-top: 12px;
+    margin-bottom: 10px;
+}
+
+.sub_text {
+    font-size: 12px;
+    color: #000000;
+}
+
+dl{
+    color: #000000;
+    font-size: 24px;
+}
+
+.borber{
+    border-style: solid;
+}

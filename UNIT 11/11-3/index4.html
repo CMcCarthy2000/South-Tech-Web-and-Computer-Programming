@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+      text-align: center;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid #e0e0e0;
+      padding: 8px 12px;
+    }
+
+    thead tr {
+      background-color: #3f51b5;
+      color: white;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: #ffffff;
+    }
+
+    tfoot tr {
+      background-color: #e8eaf6;
+      color: #000000;
+    }
+
+    tfoot tr:first-child td {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <table>
+    <thead>
+      <tr>
+        <th rowspan="2">Game Title</th>
+        <th rowspan="2">Genre</th>
+        <th colspan="2">Platform Info</th>
+        <th rowspan="2">Rating</th>
+      </tr>
+      <tr>
+        <th>Platform</th>
+        <th>Release Year</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>The Legend of Zelda: Tears of the Kingdom</td>
+        <td>Action-Adventure</td>
+        <td>Nintendo Switch</td>
+        <td>2023</td>
+        <td>9.8</td>
+      </tr>
+      <tr>
+        <td>Front Wars</td>
+        <td>Strategy</td>
+        <td>PC</td>
+        <td>2015</td>
+        <td>9.3</td>
+      </tr>
+      <tr>
+        <td>Fortnite</td>
+        <td>Battle Royale</td>
+        <td>Multi-Platform</td>
+        <td>2017</td>
+        <td>8.2</td>
+      </tr>
+      <tr>
+        <td>Minecraft</td>
+        <td>Sandbox / Survival</td>
+        <td>Multi-Platform</td>
+        <td>2011</td>
+        <td>9.3</td>
+      </tr>
+      <tr>
+        <td>Hollow Knight</td>
+        <td>Metroidvania</td>
+        <td>PC, Switch, PS4, Xbox</td>
+        <td>2017</td>
+        <td>9.0</td>
+      </tr>
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="5">All games listed are critically acclaimed titles loved by players worldwide!</td>
+      </tr>
+      <tr>
+        <td colspan="5">Data updated: November 2025</td>
+      </tr>
+    </tfoot>
+  </table>
+
+</body>
+</html>

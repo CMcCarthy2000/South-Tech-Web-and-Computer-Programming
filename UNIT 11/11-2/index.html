@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Tables</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f9f9f9;
+        }
+
+
+
+        table {
+            font-family: 'Times New Roman', Times, serif;
+            color: #0000ff;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .table-gameplay th, 
+        .table-gameplay td {
+            border: 1px solid #000000;
+            padding: 10px 12px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .table-gameplay thead th {
+            font-weight: bold;
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .table-gameplay .highlight-row {
+            background-color: #0000ff;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .table-gameplay tbody th {
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .table-gameplay .highlight-row th {
+            text-align: left;
+            color: #ffffff;
+        }
+
+        /* -----------------------------------
+           TABLE 2: Points Table
+        ----------------------------------- */
+        .table-points {
+            font-family: Arial, sans-serif;
+            width: 100%;
+            max-width: 600px;
+            border-collapse: collapse;
+            background-color: #2196F3;
+            color: #ffffff;
+        }
+
+        .table-points th, 
+        .table-points td {
+            text-align: left;
+            padding: 14px 20px;
+            font-size: 16px;
+        }
+
+        .table-points th {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .table-points th:nth-child(1), .table-points td:nth-child(1) { width: 35%; }
+        .table-points th:nth-child(2), .table-points td:nth-child(2) { width: 45%; }
+        .table-points th:nth-child(3), .table-points td:nth-child(3) { width: 20%; }
+    </style>
+</head>
+<body>
+
+    <div class="table-container">
+        <h2 class="table-gameplay-title">Frequency of Game Play</h2>
+        <table class="table-gameplay">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Almost everyday</th>
+                    <th>A few times a week</th>
+                    <th>A few times a month</th>
+                    <th>Rarely to none</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="highlight-row">
+                    <th>Total Gamers</th>
+                    <td>21%</td>
+                    <td>28%</td>
+                    <td>27%</td>
+                    <td>20%</td>
+                </tr>
+                <tr>
+                    <th>Gamers ages 16-29</th>
+                    <td>20</td>
+                    <td>30</td>
+                    <td>30</td>
+                    <td>16</td>
+                </tr>
+                <tr>
+                    <th>Gamers ages 30-59</th>
+                    <td>20</td>
+                    <td>26</td>
+                    <td>25</td>
+                    <td>24</td>
+                </tr>
+                <tr>
+                    <th>Gamers 60+</th>
+                    <td>36</td>
+                    <td>28</td>
+                    <td>17</td>
+                    <td>14</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-container">
+        <table class="table-points">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Jill</td>
+                    <td>Smith</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Eve</td>
+                    <td>Jackson</td>
+                    <td>94</td>
+                </tr>
+                <tr>
+                    <td>Adam</td>
+                    <td>Johnson</td>
+                    <td>67</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

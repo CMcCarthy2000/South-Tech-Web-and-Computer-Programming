@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>tables</title>
+    </head>
+    <style>
+        * {
+            font-weight: normal;
+        }
+
+        table {
+        border-collapse: collapse;
+        border: 1px solid black;
+        border: 1px solid;
+        width: 50%;
+        }
+
+        th, td {
+            padding: 5px 33px;
+            border: 1px solid black;
+        }
+
+        .background {
+            background-color: rgb(231, 230, 230);
+        }
+    </style>
+    <body>
+    <table>
+        <caption>Invoice</caption>
+        <tr>
+            <th colspan="1" class="background">Item / Desc.</th>
+            <th colspan="1" class="background">Qty.</th>
+            <th colspan="1" class="background">@</th>
+            <th colspan="1" class="background">Price</th>
+        </tr>
+        <tr>
+            <th>Paperclips (Box)</th>
+            <th>100</th>
+            <th>1.15</th>
+            <th>115.00</th>
+        </tr>
+
+        <tr>
+            <td>Paper (Case)</td>
+            <td>10</td>
+            <td>45.99</td>
+            <td>459.90</td>
+        </tr>
+        <tr>
+            <td>Wastepaper Baskets</td>
+            <td>2</td>
+            <td>17.99</td>
+            <td>35.98</td>
+        </tr>
+        <tr>
+            <td colspan="3">Subtotal</td>
+            <td>610.88</td>
+        </tr>
+        <tr>
+            <td colspan="2">Tax</td>
+            <td>7%</td>
+            <td>42.76</td>
+        </tr>
+        <tr>
+            <td colspan="3">Total</td>
+            <td>653.64</td>
+        </tr>
+    </table>
+    </body>
+</html>

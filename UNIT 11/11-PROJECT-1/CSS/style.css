@@ -1,0 +1,24 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: rgb(195, 241, 255);
+}
+
+body {
+    background-color: rgb(195, 241, 255);
+    font-family: tahoma, sans-serif;
+    background-image: url(../IMG/clouds2.png);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+  flex: 1 0 auto; 
+}
+
+footer { /* Keeps the footer at the bottom no matter how large or small the page is */
+    flex-shrink: 0;
+    text-align: center;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PLACEHOLDER</title>
+        <link rel="stylesheet" href="../../normalize.css">
+        <style>
+            h1 {
+                text-align: center;
+            }
+        label {
+            width: 15em;
+            float: left;
+            text-align: right;
+        }
+
+        input {
+            margin-left: 1.5em;
+        }
+
+        #register {
+            margin-left: 15em;
+        }
+        </style>
+    </head>
+    <body>
+        <h1>Web and Computer Programming</h1>
+        <form name="wcp" action="" method="get">
+            <p><label for="student">Name: </label><input type="text" name="student" id="student" autofocus required></p>
+            <p><label for="studentID">ID: </label><input type="text" name="studentID" id="studentID" required title="3 uppercase letters followed by 4 numbers" pattern="[A-Z]{3}[1-9]{4}"></p>
+            <p><label for="email">Address: </label><input type="email" name="email" id="email" required size="50" accesskey="e"></p>
+
+            <input type="submit" name="Register" id="Register" value="Register">
+            <input type="reset" name="clear" id="clear" value="clear">
+        </form>
+    </body>
+</html>

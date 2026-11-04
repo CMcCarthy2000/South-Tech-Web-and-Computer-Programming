@@ -1,24 +1,54 @@
-html, body{
+html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background-color: rgb(195, 241, 255);
 }
 
+kbd {
+  font-family: inherit;
+  white-space: nowrap;
+}
 body {
-    background-color: rgb(195, 241, 255);
-    font-family: tahoma, sans-serif;
-    background-image: url(../IMG/clouds2.png);
+    font-family: Tahoma, sans-serif;
+   /* background-image: url(../IMG/clouds2.png); */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-.content {
-  flex: 1 0 auto; 
+header {
+    position: relative;
+    height: 108px; /* Matches the image height to prevent the main content from overlapping */
 }
 
-footer { /* Keeps the footer at the bottom no matter how large or small the page is */
+.header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    border: none;
+}
+
+.header-color {
+    background-color: white;
+}
+.header-text {
+    position: absolute;
+    top: 7px;
+    left: 25px;
+}
+
+.content {
+    flex: 1 0 auto; 
+    padding: 20px; /* Added padding so text doesn't hug the browser edge */
+}
+
+.mouse {
+    background-color: white;
+}
+
+footer { 
     flex-shrink: 0;
     text-align: center;
+    padding: 15px; /* Added padding for a cleaner look */
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Pizza Place</title>
+        <style>
+
+        </style>
+    </head>
+    <body>
+        <h1> My Pizza Place</h1>
+        <form name="pizza" id="pizza" method="get" action="file.php">
+            <fieldset>
+                <legend>Customer Information</legend>
+            <p>Enter Customer Name: <input type="text" name="customer" id="customer" placeholder="Enter Customer Name" required></p>
+            <p>Enter Age: <input type="number" id="age" name="age" min="2" max="105" required></p>
+            <p>Enter Password: <input type="password" name="pw" minlength="8"></p>
+            <p><input type="submit" id="submit" value="Complete"></p>
+
+            <!-- Radio buttons-->
+             <p>
+            <input type="radio" name="crust" value="thin">thin crust<br>
+             <input type="radio" name="crust" value="thick">thick crust<br>
+             </p>
+
+             <!--Check boxes-->
+             <p>Select as many toppings as you would like. An additional $1 per topping will be applied to your total</p>
+
+             <input type="checkbox" name="topping1" value="pepperoni">Pepperoni<br>
+            <input type="checkbox" name="topping2" value="sauce">Sauce<br>
+            <input type="checkbox" name="topping3" value="grass">Grass<br>
+            <input type="checkbox" name="topping4" value="olive">Olive<br>
+
+            <!--Dropdown list-->
+            <select name="size">
+                <option value="9">Small</option>
+                <option value="12">Medium</option>
+                <option value="14">Large</option>
+                <option value="16">Extra Large</option>
+            </select>
+            <br><br>
+            <!--text area-->
+            <textarea rows="5" cols="70"></textarea>
+
+            <!---->
+             <p><input type="reset" id="reset" value="Clear Form"></p>
+             </fieldset>
+        </form>
+    </body>
+</html>

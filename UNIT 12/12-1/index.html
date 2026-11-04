@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Pizza Place</title>
+        <link rel="stylesheet" href="../../normalize.css">
+        <style>
+            h1 {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Student Information</h1>
+        <form name="pizza" id="pizza" method="get" action="file.php">
+            <fieldset>
+                <legend>Customer Information</legend>
+            <p>Enter Student Name: <input type="text" name="customer" id="customer" placeholder="Enter student name" required></p>
+            <p>Enter Age: <input type="number" id="age" name="age" min="2" max="105" required></p>
+            <p>Enter Password: <input type="password" name="pw" maxlength="5" placeholder="Limit 5"></p>
+            <p>Enter Email Address: <input type="email" id="email" name="email" placeholder="Enter email address"></p>
+
+            <!-- Radio buttons-->
+             <p>
+            <input type="radio" name="grade" value="9">Freshman<br>
+            <input type="radio" name="grade" value="10">Sophomore<br>
+            <input type="radio" name="grade" value="11">Junior<br>
+            <input type="radio" name="grade" value="12">Senior<br>
+             </p>
+
+            <!--Dropdown list-->
+            <p>Favorite Shop Class</p>
+            <select name="shops">
+                <option value="WCP">Web and Computer Programming</option>
+                <option value="CISCO">Cisco Networking</option>
+                <option value="GR">Graphic Design</option>
+                <option value="HVAC">HVAC</option>
+            </select>
+
+             <!--Check boxes-->
+             <p>Possible plans after high school. Select as many options as you would like:</p>
+
+             <input type="checkbox" name="topping1" value="pepperoni">Internship Program<br>
+            <input type="checkbox" name="topping2" value="sauce">Apprenticeship Program<br>
+            <input type="checkbox" name="topping3" value="grass">Community College<br>
+            <input type="checkbox" name="topping4" value="olive">4 Year College or University<br>
+
+
+            <br><br>
+            <!--text area-->
+            <textarea rows="4" cols="50"></textarea>
+
+            <!---->
+            <p><input type="submit" id="submit" value="Complete"> <input type="reset" id="reset" value="Clear Form"></p>
+             </fieldset>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academy - Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Coding Academy</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="info.html">Course Info</a></li>
+                <li><a href="register.html" class="active">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <h2>Student Registration Form</h2>
+            <p>Please complete the form below to enroll in an upcoming track.</p>
+
+            <form action="#" method="post">
+                
+                <!-- Text Inputs -->
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    
+                    <label for="first-name">First Name:</label>
+                    <input type="text" id="first-name" name="first_name" required>
+
+                    <label for="last-name">Last Name:</label>
+                    <input type="text" id="last-name" name="last_name" required>
+
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                </fieldset>
+
+                <!-- Radio Buttons -->
+                <fieldset>
+                    <legend>Experience Level</legend>
+                    
+                    <input type="radio" id="level-beginner" name="experience_level" value="Beginner" checked>
+                    <label for="level-beginner" class="inline-label">Beginner (No prior coding experience)</label><br>
+
+                    <input type="radio" id="level-intermediate" name="experience_level" value="Intermediate">
+                    <label for="level-intermediate" class="inline-label">Intermediate (Some HTML/CSS/Python)</label><br>
+
+                    <input type="radio" id="level-advanced" name="experience_level" value="Advanced">
+                    <label for="level-advanced" class="inline-label">Advanced (Comfortable building programs)</label>
+                </fieldset>
+
+                <!-- Checkboxes -->
+                <fieldset>
+                    <legend>Interested Topics (Select all that apply)</legend>
+
+                    <input type="checkbox" id="topic-web" name="interests" value="Web Design">
+                    <label for="topic-web" class="inline-label">Web Design & Development</label><br>
+
+                    <input type="checkbox" id="topic-python" name="interests" value="Python">
+                    <label for="topic-python" class="inline-label">Python Scripting</label><br>
+
+                    <input type="checkbox" id="topic-games" name="interests" value="Game Dev">
+                    <label for="topic-games" class="inline-label">Video Game Development</label><br>
+
+                    <input type="checkbox" id="topic-ai" name="interests" value="AI Machine Learning">
+                    <label for="topic-ai" class="inline-label">Artificial Intelligence Basics</label>
+                </fieldset>
+
+                <!-- Dropdown List -->
+                <fieldset>
+                    <legend>Course Selection</legend>
+                    <label for="preferred-course">Select Preferred Course:</label>
+                    <select id="preferred-course" name="preferred_course" required>
+                        <option value="" disabled selected>-- Choose a course --</option>
+                        <option value="web-dev">Web Development Fundamentals</option>
+                        <option value="python">Python Programming Essentials</option>
+                        <option value="game-dev">Game Development with Unity</option>
+                        <option value="data-struct">Data Structures & Algorithms</option>
+                        <option value="bootcamp">Full-Stack Summer Bootcamp</option>
+                    </select>
+                </fieldset>
+
+                <!-- Text Area -->
+                <fieldset>
+                    <legend>Additional Information</legend>
+                    <label for="comments">Comments or Questions:</label>
+                    <textarea id="comments" name="comments" rows="4" placeholder="Tell us about your goals or any questions you have..."></textarea>
+                </fieldset>
+
+                <!-- Buttons -->
+                <div class="button-group">
+                    <button type="submit">Submit Registration</button>
+                    <button type="reset">Reset Form</button>
+                </div>
+
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Conor McCarthy</p>
+    </footer>
+</body>
+</html>

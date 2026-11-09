@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'Balgruf';
+  src: url('../fonts/Balgruf.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Deadra';
+  src: url('../fonts/Daedra.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Music Company</title>
+        <link rel="stylesheet" href="style/style.css">
+
+        <style>
+            * {
+                font-family: Balgruf;
+            }
+            #submit, #reset {
+                background-color: rgb(190, 190, 190);
+                box-shadow: 2px 4px blue;
+            }
+        </style>
+    </head>
+    <body>
+        <form>
+            <fieldset>
+                <h1>Please complete our survey</h1>
+                <h2>Contact information</h2>
+                <p><label for="email">Email address:</label> <input type="email" name="email" id="email" placeholder="Enter Email" required></p>
+                <p><label for="fname">First name:</label> <input type="text" id="fname" name="fname" required></p>
+                <p><label for="lname">Last name:</label> <input type="text" id="lname" name="lname" required></p>
+
+                <h2>Geographic information</h2>
+                <p><label for="state">State:</label> <input type="text" name="state" id="state" placeholder="Two characters" maxlength="2" pattern="[A-Za-z]{2}" required></p>
+                <p><label for="zip">Zip code:</label> <input type="text" id="zip" name="zip" placeholder="Five digits" pattern="\d{5}" maxlength="5" inputmode="numeric" required></p>
+
+                <!--Check boxes-->
+                <h2>How did you hear about us?</h2>
+
+                <p><label for="web">Web Search:</label> <input type="checkbox" name="web" id="web" value="web"></p>
+                <p><label for="facebook">Facebook:</label> <input type="checkbox" name="facebook" id="facebook" value="facebook"></p>
+                <p><label for="twitter">Twitter:</label> <input type="checkbox" name="twitter" id="twitter" value="twitter"></p>
+                <p><label for="emessage">Email message:</label> <input type="checkbox" name="emessage" id="emessage" value="emessage"></p>
+
+                <h2>Thank you for taking our survey!</h2>
+
+                <input type="submit" id="submit" value="Complete">
+                <input type="reset" id="reset" value="Clear Form">
+            </fieldset>
+        </form>
+    </body>
+</html>

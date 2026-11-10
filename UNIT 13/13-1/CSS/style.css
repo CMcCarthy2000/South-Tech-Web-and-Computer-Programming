@@ -1,0 +1,25 @@
+
+header {
+    background-color: gray;
+    margin: 0 !important;
+    padding: 2px !important;
+    font-family: comic sans ms, Arial, Helvetica, sans-serif;
+}
+
+body {
+      margin: 0;
+      padding: 0;
+}
+
+.LOGO {
+    padding: 2px ;
+    height: 100px;
+}
+
+.CONTENT {
+    padding-left: 10px;
+}
+
+.IMAGE {
+    height: 400px;
+}

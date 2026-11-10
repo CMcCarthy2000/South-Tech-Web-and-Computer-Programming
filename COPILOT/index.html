@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11100d">
+  <title>Rindbound — A Little Cheese Quest</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="game.js" defer></script>
+</head>
+<body>
+  <main class="page">
+    <header class="masthead">
+      <a class="wordmark" href="#" aria-label="Rindbound home">RINDBOUND<span>★</span></a>
+      <p class="edition">A LITTLE CHEESE QUEST <span>·</span> DEMO 01</p>
+      <button class="sound-toggle" type="button" aria-pressed="false" title="Toggle sound effects">SOUND: OFF</button>
+    </header>
+
+    <section class="intro" aria-labelledby="game-title">
+      <p class="eyebrow">WELCOME, WANDERING SNACKER</p>
+      <h1 id="game-title">THE <span>GREAT</span><br>CHEESE CAVERN</h1>
+      <p class="lede">A tiny turn-based adventure about big feelings, strange snacks, and the friends you meet along the way.</p>
+    </section>
+
+    <section class="game-shell" aria-label="Rindbound game">
+      <div class="game-topline">
+        <span><i class="live-dot"></i> DEEP IN THE DAIRY DARK</span>
+        <span id="encounter-label">ENCOUNTER 01 / 01</span>
+      </div>
+
+      <div class="scene" id="scene">
+        <div class="cave-glow"></div>
+        <div class="stalactites" aria-hidden="true">▾　▾　▾　　　▾　▾　　　▾</div>
+        <div class="enemy" id="enemy" role="img" aria-label="A shy cheese creature">
+          <div class="enemy-shadow"></div>
+          <div class="enemy-body">
+            <span class="cheese-hole hole-one"></span><span class="cheese-hole hole-two"></span>
+            <span class="cheese-hole hole-three"></span><span class="cheese-hole hole-four"></span>
+            <span class="eye eye-left"></span><span class="eye eye-right"></span>
+            <span class="mouth" id="enemy-mouth"></span>
+            <span class="wing wing-left"></span><span class="wing wing-right"></span>
+          </div>
+          <div class="enemy-name" id="enemy-name">MUENSTER MOTH</div>
+        </div>
+        <div class="arena" id="arena" aria-label="Dodge the curds using arrow keys or WASD">
+          <div class="arena-hint">DODGE! <span>← ↑ ↓ →</span></div>
+          <div class="soul" id="soul" aria-label="Your heart"></div>
+          <div class="arena-message" id="arena-message"></div>
+        </div>
+        <div class="scene-caption" id="scene-caption" aria-live="polite">A Muenster Moth flutters down from the cave ceiling.</div>
+      </div>
+
+      <div class="status-row">
+        <div class="hero-status">
+          <div class="avatar" aria-hidden="true">◈</div>
+          <div><strong>WANDERER</strong><span>LV 1 · SNACK SEEKER</span></div>
+        </div>
+        <div class="hp-block">
+          <div class="hp-label"><span>HP</span><strong id="hp-readout">20 / 20</strong></div>
+          <div class="hp-track"><span id="hp-bar"></span></div>
+        </div>
+        <div class="inventory"><span>POCKET SNACKS</span><strong id="snack-count">2</strong><span class="snack-icon" aria-hidden="true">✦</span></div>
+      </div>
+
+      <div class="dialogue-box" aria-live="polite" aria-atomic="true">
+        <span class="dialogue-star" aria-hidden="true">✦</span>
+        <p id="dialogue">The Muenster Moth flutters down from the cave ceiling.</p>
+      </div>
+
+      <div class="battle-menu" id="battle-menu">
+        <p class="menu-label">WHAT WILL YOU DO?</p>
+        <div class="actions">
+          <button class="action action-gold" data-action="talk"><span aria-hidden="true">✿</span> TALK</button>
+          <button class="action action-coral" data-action="taste"><span aria-hidden="true">◇</span> TASTE</button>
+          <button class="action action-blue" data-action="brace"><span aria-hidden="true">⬡</span> BRACE</button>
+          <button class="action action-green" data-action="spare"><span aria-hidden="true">♡</span> SPARE</button>
+        </div>
+        <p class="key-hint">TIP: KINDNESS CAN BE MORE POWERFUL THAN A BITE.</p>
+      </div>
+
+      <div class="ending" id="ending" hidden>
+        <p class="ending-stamp">CAVE CLEAR!</p>
+        <h2 id="ending-title">A FRIEND, NOT A FIGHT</h2>
+        <p id="ending-copy">The Moth shows you a shortcut through the cave.</p>
+        <button id="restart" class="restart-button" type="button">PLAY AGAIN <span>↻</span></button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>MADE WITH <b>♥</b> AND A PINCH OF SALT</span>
+      <span>ARROWS / WASD TO DODGE <i>·</i> SPACE TO CONFIRM</span>
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070a12">
+  <title>ORRERY — Solar System Explorer</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="simulation.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Orrery home"><span class="brand-mark">◎</span> ORRERY</a>
+      <div class="top-meta"><span class="live"><i></i> LIVE SIMULATION</span><span class="top-divider"></span><span>HELIOCENTRIC MODEL</span></div>
+      <button class="icon-button help-button" id="help-button" type="button" aria-label="Show controls" title="Controls">?</button>
+    </header>
+
+    <div class="workspace">
+      <section class="view-panel" aria-label="Solar system simulation">
+        <div class="view-heading">
+          <div><p class="eyebrow">THE NEIGHBORHOOD</p><h1>Solar system <span>explorer</span></h1></div>
+          <div class="view-actions">
+            <button class="view-toggle active" id="labels-toggle" type="button" aria-pressed="true">LABELS <b>ON</b></button>
+            <button class="view-toggle active" id="orbits-toggle" type="button" aria-pressed="true">ORBITS <b>ON</b></button>
+            <button class="view-toggle" id="trails-toggle" type="button" aria-pressed="false">TRAILS <b>OFF</b></button>
+          </div>
+        </div>
+        <div class="canvas-wrap" id="canvas-wrap">
+          <canvas id="solar-canvas" aria-label="Interactive three-dimensional model of the Sun and planets. Click a planet to inspect it."></canvas>
+          <div class="canvas-corner top-left"><span class="corner-dot"></span> SOL SYSTEM / 01</div>
+          <div class="canvas-corner top-right" id="view-scale">SCALE 1.0×</div>
+          <div class="canvas-corner bottom-left" id="coordinate-readout">SIMULATION ACTIVE</div>
+          <div class="canvas-corner bottom-right">DRAG TO PAN <span>·</span> SCROLL TO ZOOM</div>
+          <div class="canvas-tooltip" id="canvas-tooltip" role="status"></div>
+          <div class="empty-hint" id="empty-hint" hidden>ZOOM OUT TO SEE THE WHOLE SYSTEM</div>
+        </div>
+        <div class="camera-control">
+          <span class="control-label">3D CAMERA ELEVATION</span>
+          <input id="camera-slider" type="range" min="10" max="82" step="1" value="32" aria-label="3D camera elevation">
+          <strong id="camera-readout">32°</strong>
+          <span class="camera-hint">EDGE-ON <i>↔</i> TOP-DOWN</span>
+        </div>
+        <div class="timeline">
+          <button class="transport-button" id="play-button" type="button" aria-label="Pause simulation" title="Pause">Ⅱ</button>
+          <button class="transport-button step-button" id="step-back" type="button" aria-label="Step backward" title="Step backward">‹</button>
+          <button class="transport-button step-button" id="step-forward" type="button" aria-label="Step forward" title="Step forward">›</button>
+          <div class="time-readout"><span class="control-label">SIMULATION DATE</span><strong id="date-readout">JAN 01, 2025</strong></div>
+          <div class="speed-control"><label class="control-label" for="speed-slider">TIME SPEED <strong id="speed-readout">1 day / sec</strong></label><input id="speed-slider" type="range" min="0" max="6" step="1" value="2"></div>
+          <button class="reset-button" id="reset-button" type="button" title="Reset date and view">RESET</button>
+        </div>
+      </section>
+
+      <aside class="inspector" aria-label="Planet inspector">
+        <div class="inspector-header"><div><p class="eyebrow">FLIGHT COMPUTER</p><h2>Object data</h2></div><span class="signal"><i></i> ONLINE</span></div>
+        <div class="selected-object" id="selected-object">
+          <div class="object-kicker"><span class="object-symbol" id="object-symbol">☉</span><span id="object-kind">G2V · MAIN-SEQUENCE STAR</span></div>
+          <h3 id="object-name">The Sun</h3>
+          <p class="object-description" id="object-description">The star at the center of our solar system. Its gravity keeps the planets in their steady dance.</p>
+        </div>
+        <div class="data-grid">
+          <div class="data-item"><span>MEAN DISTANCE</span><strong id="data-distance">—</strong><small id="data-distance-sub">from the Sun</small></div>
+          <div class="data-item"><span>ORBITAL PERIOD</span><strong id="data-period">—</strong><small>one revolution</small></div>
+          <div class="data-item"><span>DIAMETER</span><strong id="data-diameter">1.39 M km</strong><small>equatorial</small></div>
+          <div class="data-item"><span>MOONS</span><strong id="data-moons">—</strong><small id="data-moons-sub">known satellites</small></div>
+        </div>
+        <div class="orbit-facts"><span class="section-label">ORBITAL ELEMENTS</span>
+          <div class="fact-row"><span>Eccentricity</span><strong id="data-ecc">—</strong></div>
+          <div class="fact-row"><span>Inclination</span><strong id="data-inc">—</strong></div>
+          <div class="fact-row"><span>Orbital velocity</span><strong id="data-velocity">—</strong></div>
+        </div>
+        <div class="planet-picker"><div class="picker-heading"><span class="section-label">CELESTIAL BODIES</span><span>SELECT TO INSPECT</span></div><div class="planet-list" id="planet-list"></div></div>
+        <div class="inspector-footer"><span>DATA: APPROX. NASA FACT SHEETS</span><span>MODEL: NOT TO SCALE</span></div>
+      </aside>
+    </div>
+    <footer class="footer"><span>ORRERY <i>·</i> AN INTERACTIVE MODEL OF OUR SOLAR SYSTEM</span><span>PLANETARY POSITIONS ARE APPROXIMATE <i>·</i> NOT FOR NAVIGATION</span></footer>
+  </main>
+  <div class="modal-backdrop" id="help-modal" hidden>
+    <section class="help-card" role="dialog" aria-modal="true" aria-labelledby="help-title">
+      <button class="icon-button close-help" id="close-help" type="button" aria-label="Close controls">×</button>
+      <p class="eyebrow">FLIGHT MANUAL</p><h2 id="help-title">Explore the system</h2>
+      <p>Click a planet or its name to inspect its orbital data. Drag the starfield to pan, or scroll to zoom in and out. Adjust camera elevation to tilt the orbital plane.</p>
+      <p>Use the play button to pause, adjust simulation speed, or step the date forward and back. Turn on trails to follow each planet's path.</p>
+      <p class="help-note">Planet sizes and distances are compressed for visibility. The perspective view, orbital periods, and eccentricities are approximate.</p>
+    </section>
+  </div>
+</body>
+</html>

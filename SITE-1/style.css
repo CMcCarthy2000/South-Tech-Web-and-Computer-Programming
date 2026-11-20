@@ -11,6 +11,14 @@ html, body {
     color: #FFFFFF;
 }
 
+:root {
+    --city-navy: #35446a;
+    --city-navy-deep: #303e61;
+    --city-shadow: #7d879e;
+    --city-highlight: #d7dce7;
+    --city-link: #42567d;
+}
+
 body {
      /* background-image: url(IMG/LOGIN.JPEG); */
      background-size: 100vw 100vh;
@@ -27,25 +35,21 @@ h1 {
    ========================================== */
 .TOP {
     box-sizing: border-box;
-    /* Main dark blue filling 92% of the bar, transitioning into a 2px light-blue highlight line */
-    background: linear-gradient(to bottom, #003399 calc(100% - 2px), #a6bde7 100%);
+    background: linear-gradient(to bottom, var(--city-navy) calc(100% - 2px), var(--city-highlight) 100%);
     height: 7.8vh;
     width: 100%;
 }
 
 .MIDDLE {
     box-sizing: border-box;
-    background-color: #5a7edc;
+    background: linear-gradient(to bottom, #f4f5f9 0%, #d9dde6 44%, #b1bacb 100%);
     height: 84.4vh;
     width: 100%;
-    /* Adds the soft white glow in the top-left corner */
-    background-image: radial-gradient(circle at 7% 15%, rgba(255, 255, 255, 0.45) 0%, transparent 22%);
 }
 
 .BOTTOM {
     box-sizing: border-box;
-    /* 2px orange stripe at the very top edge, transitioning directly into the dark blue background */
-    background: linear-gradient(to bottom, #d25a12 2px, #003399 2px);
+    background: linear-gradient(to bottom, var(--city-highlight) 2px, var(--city-navy) 2px);
     height: 7.8vh;
     width: 100%;
     position: absolute;
@@ -79,7 +83,7 @@ span {
   font-size: 70px;
   font-weight: 900;
   font-style: italic;
-  color: #ffffff;
+  color: var(--city-navy-deep);
   letter-spacing: -3px;
   display: inline-block;
   padding: 0;
@@ -87,9 +91,9 @@ span {
   
   /* Layered sharp shadows to overwrite browser smoothing */
   text-shadow: 
-    3px 3px 0px #3b4c80,
-    2.5px 2.5px 0px #3b4c80,
-    2px 2px 0px #3b4c80;
+    3px 3px 0px var(--city-shadow),
+    2.5px 2.5px 0px var(--city-shadow),
+    2px 2px 0px var(--city-shadow);
     
   -webkit-font-smoothing: none !important;
   -moz-osx-font-smoothing: none !important;
@@ -115,13 +119,14 @@ span {
 .middle-content {
     padding-top: 60px;
     padding-left: 30px;
+    color: var(--city-navy-deep);
 }
 
 .bio-text {
     font-family: Tahoma, sans-serif;
     font-size: 14px;
     margin-top: 20px;
-    color: #ffffff;
+    color: var(--city-navy-deep);
 }
 
 /* ==========================================
@@ -159,7 +164,7 @@ span {
 
 /* The hover interaction specified on Page 9 of the guidelines */
 .nav-item:hover {
-    color: #fed222; /* Changes the text to the classic XP hover gold */
+    color: #d7dce7;
 }
 
 /* Ensures your shortcut icons stay perfectly proportioned */
@@ -180,7 +185,7 @@ span {
 /* Left Pane Layout Sidebar Styles */
 .left-pane {
     width: 240px;
-    background: linear-gradient(to bottom, #7495e8, #2359cb);
+    background: linear-gradient(to bottom, #7382a1, #485d85);
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -196,7 +201,7 @@ span {
 }
 
 .task-header {
-    background: linear-gradient(to right, #4d7ee7, #3361cb);
+    background: linear-gradient(to right, #667898, #475b7e);
     color: #ffffff;
     font-weight: bold;
     font-size: 12px;
@@ -212,14 +217,14 @@ span {
 }
 
 .task-body a {
-    color: #215dc6; /* Official text color spec from manual Page 42 */
+    color: var(--city-link);
     text-decoration: none;
     font-size: 11px;
 }
 
 .task-body a:hover {
     text-decoration: underline;
-    color: #316ac5;
+    color: #596c8d;
 }
 
 /* Right Content Workspace Area Styles */
@@ -232,13 +237,13 @@ span {
 }
 
 .folder-title {
-    color: #002e9b;
+    color: var(--city-navy);
     font-family: Tahoma, sans-serif;
     font-size: 22px;
     margin-top: 0;
     margin-bottom: 20px;
     font-weight: normal;
-    border-bottom: 1px solid #b5cbe8;
+    border-bottom: 1px solid #c1cada;
     padding-bottom: 8px;
 }
 
@@ -261,7 +266,7 @@ span {
 
 .project-card:hover {
     border-color: #7f9db9;
-    background-color: #f0f7ff;
+    background-color: #f3f5f9;
 }
 
 .project-icon-wrapper {
@@ -275,7 +280,7 @@ span {
 
 .project-info h3 {
     margin: 0 0 4px 0;
-    color: #215dc6;
+    color: var(--city-link);
     font-size: 15px;
     font-family: Tahoma, sans-serif;
 }
@@ -314,8 +319,8 @@ span {
 }
 
 .photo-thumbnail-card:hover {
-    border-color: #316ac5;
-    background-color: #f2f7fd;
+    border-color: #647798;
+    background-color: #f3f5f9;
 }
 
 /* Centered photo viewport box context */
@@ -376,7 +381,7 @@ span {
 
 .user-profile-meta h2 {
     margin: 0;
-    color: #002e9b;
+    color: var(--city-navy);
     font-size: 18px;
     font-family: Tahoma, sans-serif;
 }
@@ -411,5 +416,5 @@ span {
 
 /* Official list arrow point indicator representation variant */
 .xp-bullet-list li::marker {
-    color: #4d7ee7;
+    color: #526789;
 }

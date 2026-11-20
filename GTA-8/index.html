@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111313">
+  <title>GTA 8 — Liberty City</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="game-shell">
+    <canvas id="game" aria-label="Three-dimensional Liberty City driving game"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="wordmark" href="#" aria-label="GTA 8 home">GTA<span>8</span></a>
+      <div class="location"><span class="live-dot"></span><span id="district">LIBERTY CITY</span><span class="location-divider">/</span><span id="clock">09:41 AM</span></div>
+      <button class="icon-button" id="pause-button" aria-label="Pause game" title="Pause (P)">Ⅱ</button>
+    </header>
+    <section class="mission-card" aria-live="polite">
+      <div class="eyebrow"><span class="mission-icon">◆</span> CURRENT JOB <span class="job-number">#008</span></div>
+      <h1 id="mission-title">A little <em>pickup</em> work</h1>
+      <p id="mission-copy">Grab the 8 packages, then meet your contact downtown.</p>
+      <div class="progress-track"><span id="progress-bar"></span></div>
+      <div class="progress-label"><span id="progress-text">PACKAGES</span><span><b id="package-count">0</b><span class="muted"> / 8</span></span></div>
+      <div class="objective"><span class="objective-pin">↗</span><span id="objective-text">Find the first package</span><span id="objective-distance">—</span></div>
+    </section>
+    <aside class="minimap-card">
+      <div class="map-heading"><span>NEIGHBORHOOD</span><span class="map-north">N ↑</span></div>
+      <canvas id="minimap" width="220" height="220" aria-label="Neighborhood map"></canvas>
+      <div class="map-legend"><span><i class="legend-player"></i> YOU</span><span><i class="legend-target"></i> JOB</span></div>
+    </aside>
+    <section class="vehicle-readout" aria-label="Vehicle speed">
+      <span class="speed-label">MPH</span><span id="speed">000</span><span class="speed-unit">LIBERTY GT</span>
+    </section>
+    <div class="toast" id="toast" role="status"></div>
+    <div class="touch-controls" aria-label="Touch driving controls">
+      <div class="touch-steering">
+        <button data-control="left" aria-label="Steer left">←</button>
+        <button data-control="right" aria-label="Steer right">→</button>
+      </div>
+      <div class="touch-pedals">
+        <button data-control="brake" aria-label="Brake">BRAKE</button>
+        <button class="gas-button" data-control="gas" aria-label="Accelerate">GO</button>
+      </div>
+    </div>
+    <div class="screen" id="start-screen">
+      <div class="screen-card">
+        <div class="screen-kicker">LIBERTY CITY · FREE ROAM</div>
+        <h2>WELCOME TO<br><span>LIBERTY CITY</span></h2>
+        <p>One city. Eight packages. A very patient contact.</p>
+        <button class="primary-button" id="start-button">START YOUR SHIFT <span>→</span></button>
+        <div class="keyboard-hint">WASD / ARROWS TO DRIVE <span>·</span> SPACE TO BRAKE <span>·</span> P TO PAUSE</div>
+      </div>
+      <div class="screen-caption">A SMALL OPEN-CITY DRIVING GAME</div>
+    </div>
+    <div class="screen hidden" id="pause-screen">
+      <div class="screen-card compact">
+        <div class="screen-kicker">TAKE YOUR TIME</div>
+        <h2>GAME <span>PAUSED</span></h2>
+        <p>The city will wait.</p>
+        <button class="primary-button" id="resume-button">BACK TO THE CITY <span>→</span></button>
+        <button class="text-button" id="restart-button">RESTART JOB</button>
+      </div>
+    </div>
+    <div class="screen hidden" id="complete-screen">
+      <div class="screen-card compact">
+        <div class="screen-kicker">JOB COMPLETE · LIBERTY CITY</div>
+        <h2>THAT'S A <span>WRAP.</span></h2>
+        <p>All packages delivered. Your contact owes you one.</p>
+        <button class="primary-button" id="play-again-button">DRIVE IT AGAIN <span>→</span></button>
+      </div>
+    </div>
+    <div class="error-message hidden" id="error-message">This game needs a browser with WebGL enabled. Try opening it in a current version of Chrome, Edge, or Firefox.</div>
+  </main>
+  <script src="js/game.js"></script>
+</body>
+</html>

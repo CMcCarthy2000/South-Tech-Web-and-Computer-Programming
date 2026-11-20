@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keyword" content="scales, pet store, reptiles, amphibians, exotic pets, pet care, pet supplies, careers">
+        <meta name="description" content="Apply to join the Scale Kings team! Explore opportunities and submit your application.">
+        <title>Scale Kings - Application Form</title>
+        <link rel="stylesheet" href="CSS/style.css">
+        <style>
+            /* Scoped to main so it doesn't override your style.css layout */
+            main form {
+                max-width: 500px;
+                margin: 20px auto;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                text-align: left;
+            }
+            main label,
+            main fieldset {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                border: none;
+                padding: 0;
+                margin: 0;
+            }
+            main .radio-row {
+                flex-direction: row;
+                align-items: center;
+                gap: 8px;
+            }
+            main input,
+            main textarea,
+            main button {
+                padding: 10px;
+                font-size: 16px;
+                box-sizing: border-box;
+            }
+            #custom-upload {
+                display: none;
+            }
+            main fieldset:has(input[value="custom"]:checked) #custom-upload {
+                display: flex;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="nav_bar">
+            <hr>
+            <a href="index.html">Home</a>
+            <hr>
+            <a href="order.html">Wide selection of reptiles and amphibians</a>
+            <hr>
+            <a href="advice.html">Expert advice and care tips</a>
+            <hr>
+            <a href="form.html">Take one of our scaley friends with you</a>
+            <hr>
+        </div>
+
+        <div class="right_content">
+            <header>
+                <img src="IMG/snake_nobg.png" class="logo" alt="Scale Kings Logo">
+                <h1>Scale Kings Pet store</h1>
+                <img src="IMG/snake_nobg.png" class="logo" alt="Scale Kings Logo">
+            </header>
+
+            <main>
+                <h2>Job Application Form</h2>
+                <hr>
+                <form action="https://formbold.com/s/FORM_ID" method="POST" enctype="multipart/form-data">
+                    <label>
+                        First Name
+                        <input type="text" name="firstname" placeholder="Your first name">
+                    </label>
+                    <label>
+                        Last Name
+                        <input type="text" name="lastname" placeholder="Your last name">
+                    </label>
+                    <label>
+                        Email
+                        <input type="email" name="email" placeholder="example@email.com">
+                    </label>
+                    <fieldset>
+                        <legend>Gender</legend>
+                        <label class="radio-row"><input type="radio" name="gender" value="male"> Male</label>
+                        <label class="radio-row"><input type="radio" name="gender" value="female"> Female</label>
+                        <label class="radio-row"><input type="text" name="gender" value="other"></label>
+                        <label class="radio-row"><input type="radio" name="gender" value="custom"> Custom</label>
+                        <label id="custom-upload">
+                            Upload Custom File (Max 10MB)
+                            <input type="file" name="custom_gender_file" onchange="if(this.files[0]?.size > 10485760){ alert('File must be under 10MB'); this.value=''; }">
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Phone Number</legend>
+                        <input type="text" name="areacode" placeholder="Area code">
+                        <input type="tel" name="phone" placeholder="Phone number">
+                    </fieldset>
+                    <label>
+                        Applying for Position
+                        <input type="text" name="position" placeholder="Enter the position you're applying for">
+                    </label>
+                    <label>
+                        When Can You Start?
+                        <input type="date" name="start-date">
+                    </label>
+                    <fieldset>
+                        <legend>Address</legend>
+                        <input type="text" name="address" placeholder="Street address">
+                        <input type="text" name="address2" placeholder="Street address line 2">
+                    </fieldset>
+                    <label>
+                        Cover Letter
+                        <textarea rows="6" name="message" placeholder="Tell us about yourself and why you're a good fit for this position..."></textarea>
+                    </label>
+                    <label>
+                        Upload Resume
+                        <input type="file" name="upload" onchange="if(this.files[0]?.size > 10485760){ alert('File must be under 10MB'); this.value=''; }">
+                    </label>
+                    <button type="submit">Apply Now</button>
+                </form>
+            </main>
+
+            <footer>
+                &copy; Vilhelm Swanson &amp; Conor McCarthy 2026
+            </footer>
+        </div>
+    </body>
+</html>

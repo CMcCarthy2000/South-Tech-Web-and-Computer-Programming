@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    display: flex; /* Puts .nav_bar and .right_content side by side */
+}
+
+.nav_bar {
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+        url("../IMG/navbar_background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgb(2, 51, 14);
+    width: 200px;
+    height: 100vh;
+    flex-shrink: 0; /* Keeps navbar at exactly 200px wide */
+    position: sticky;
+    top: 0;
+    padding-left: 5px;
+}
+
+.right_content {
+    flex-grow: 1; /* Fills the remaining space on the right */
+    padding: 20px; /* Adds clean spacing around your header, main, and footer */
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+a {
+    color: white;
+    text-decoration: none;
+}
